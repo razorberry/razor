@@ -22,3 +22,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls.calendar 
+{
+	/**
+	 * Interface for an event (ie. "Birthday party") model used inside a Calendar control.
+	 */
+	public interface ICalendarEvent 
+	{
+		
+		function set date(d:Date):void;
+		function get date():Date;
+		
+	}
+	
+}

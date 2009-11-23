@@ -22,3 +22,34 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.layout.types
+{
+	import flash.utils.Dictionary;
+	
+	import razor.core.Metrics;
+	
+	/**
+	 * Interface for a layout implementation.
+	 * @see Layer
+	 */
+	public interface ILayoutImpl
+	{
+		/**
+		 * Takes an array of objects of type {container:Container, layout:LayoutData}
+		 * and sizes and arranges the containers accordingly.
+		 * @param	data	The array of containers and their associated LayoutDatas
+		 * @param	width	The available width
+		 * @param	height	The available height
+		 */
+		function doLayout(children:Array, layoutDatas:Dictionary, width:Number, height:Number, margins:Metrics = null):void;
+		
+		/**
+		 * Get the visible size after a layout operation.
+		 * These dimensions will ignore any invisible components
+		 * @return A Metrics object containing the width and height.
+		 */
+		function getVisibleMetrics():Metrics;
+		
+	}
+}

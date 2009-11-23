@@ -22,3 +22,29 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core
+{
+	/**
+	 * A class describing the metrics for the four corners of a rectangle.
+	 */
+	public final class CornerMetrics
+	{
+		/** Top left */
+		public var tl:Number;
+		/** Top right */
+		public var tr:Number;
+		/** Bottom left */
+		public var bl:Number;
+		/** Bottom right */
+		public var br:Number;
+		
+		public function CornerMetrics(tl:Number = 0, tr:Number = 0, bl:Number = 0, br:Number = 0)
+		{
+			this.tl = tl;
+			this.tr = tr;
+			this.bl = bl;
+			this.br = br;
+		}
+	}
+}

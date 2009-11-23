@@ -22,3 +22,30 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core.tooltips
+{
+	/**
+	 * Interface for a tooltip renderer.
+	 */
+	public interface ITooltip
+	{
+		/**
+		 * Set a value for the tooltip.
+		 * @param data	The TooltipData instance that will be displayed.
+		 */
+		function setValue(data:TooltipData):void;
+		
+		/**
+		 * Destroy this tooltip instance.
+		 */
+		function destroy():void;
+		
+		/**
+		 * Position this tooltip.
+		 * @param	x	The new x-position
+		 * @param	y	The new y-position
+		 */
+		function move(x:Number,y:Number):void;
+	}
+}

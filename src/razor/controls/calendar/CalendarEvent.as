@@ -22,3 +22,49 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls.calendar 
+{
+	import flash.events.EventDispatcher;
+	
+	/**
+	 * Model representing an event on a Calendar.
+	 * "Event" meaning "Birthday party" rather than "dispatched".
+	 */
+	public class CalendarEvent extends EventDispatcher 
+		implements ICalendarEvent
+	{
+		private var _date:Date;
+		private var _description:String;
+		
+		public function CalendarEvent(d:Date = null, desc:String = "") 
+		{
+			if (d != null)
+			date = d;
+			
+			if (desc)
+				description = desc;
+		}
+		
+		public function set date(d:Date):void
+		{
+			_date = d;
+		}
+		
+		public function get date():Date
+		{
+			return _date;
+		}
+		
+		public function set description(str:String):void
+		{
+			_description = str;
+		}
+		
+		public function get description():String
+		{
+			return _description;
+		}
+	}
+	
+}

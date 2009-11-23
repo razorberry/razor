@@ -22,3 +22,21 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls.calendar 
+{
+	import razor.controls.Calendar;
+
+	/**
+	 * Interface for a renderer used inside a Calendar control.
+	 */
+	public interface ICalendarRenderer 
+	{
+		function set date(d:Date):void;
+		function get date():Date;
+		
+		function set owner(calendar:Calendar):void;
+		function get owner():Calendar;
+	}
+	
+}

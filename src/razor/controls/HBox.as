@@ -22,3 +22,35 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls
+{
+	import razor.layout.types.HorizontalLayout;
+
+	/**
+	 * A layout container with a basic horizontal layout.
+	 */
+	public class HBox extends Box
+	{
+		/** @private */ override protected function getClass():String { return "HBox"; }
+		
+		private var impl:HorizontalLayout;
+		
+		public function HBox()
+		{
+			super();
+			
+			implementation = impl = new HorizontalLayout();
+		}
+		
+		public function set spacing(v:Number):void
+		{
+			impl.horizontalGap = v;
+		}
+		
+		public function get spacing():Number
+		{
+			return impl.horizontalGap;
+		}
+	}
+}

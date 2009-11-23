@@ -22,3 +22,35 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls
+{
+	import razor.layout.types.VerticalLayout;
+
+	/**
+	 * A layout container with a basic vertical layout.
+	 */
+	public class VBox extends Box
+	{
+		/** @private */ override protected function getClass():String { return "VBox"; }
+		
+		private var impl:VerticalLayout;
+		
+		public function VBox()
+		{
+			super();
+			
+			implementation = impl = new VerticalLayout();
+		}
+		
+		public function set spacing(v:Number):void
+		{
+			impl.verticalGap = v;
+		}
+		
+		public function get spacing():Number
+		{
+			return impl.verticalGap;
+		}
+	}
+}

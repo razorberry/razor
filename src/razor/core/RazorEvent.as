@@ -22,3 +22,35 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core 
+{
+	import flash.events.Event;
+	import flash.utils.Dictionary;
+	
+	/**
+	 * An extension of the Event class to allow for additional dynamic parameters.
+	 */
+	public dynamic class RazorEvent extends Event
+	{
+		/** @private */ protected var dict:Dictionary;
+		
+		public function RazorEvent(type:String, initObj:Object = null)
+		{
+			super(type);
+			
+			dict = new Dictionary(true);
+			
+			if (initObj != null)
+				for (var z:* in initObj)
+					dict[z] = this[z] = initObj[z];
+					
+		}
+		
+		/** @private */
+		override public function clone():Event
+		{
+			return new RazorEvent(type, dict);
+		}
+	}	
+}

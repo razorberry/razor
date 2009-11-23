@@ -22,3 +22,21 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core {
+
+	/**
+	 * Interface for a bordered display object. Provides a method for measuring the internal space of a border.
+	 */
+	public interface IBordered 
+	{
+		/**
+		 * Provide a Metrics object, describing the internal dimensions of the border of this
+		 * control.
+		 * @return A Metrics instance
+		 * 
+		 */
+		function getBorderMetrics():Metrics;
+	}
+	
+}

@@ -22,3 +22,12 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core
+{
+	/**
+	 * Internal namespace for the razor component framework.
+	 * Import this file and open the namespace to access particular methods.
+	 */
+	public namespace razor_internal;
+}

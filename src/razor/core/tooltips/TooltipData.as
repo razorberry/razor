@@ -22,3 +22,35 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core.tooltips
+{
+	/**
+	 * A class containing data to be rendered in a tooltip.
+	 * Could be extended to contain data other than a string.
+	 */
+	public class TooltipData
+	{
+		/** @private */ protected var _text:String;
+		
+		public function TooltipData(text:String)
+		{
+			_text = text;
+		}
+		
+		/**
+		 * Set/Get the text for a tooltip.
+		 * @param	str		The string to display.
+		 */
+		public function set text(str:String):void
+		{
+			_text = str;
+		}
+		
+		/** @private */
+		public function get text():String
+		{
+			return _text;
+		}
+	}
+}

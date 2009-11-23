@@ -22,3 +22,30 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core
+{
+	/**
+	 * Class representing various metrics of a rectangle.
+	 */
+	public final class Metrics
+	{
+		public var width:Number;
+		public var height:Number;
+		
+		public var l:Number;
+		public var r:Number;
+		public var t:Number;
+		public var b:Number;
+		
+		public function Metrics(w:Number = 0, h:Number = 0, l:Number = 0, r:Number = 0, t:Number = 0, b:Number = 0)
+		{
+			this.width = w;
+			this.height = h;
+			this.l = l;
+			this.r = r;
+			this.b = b;
+			this.t = t;
+		}
+	}
+}

@@ -22,3 +22,16 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls.grid
+{
+	public interface ICellRenderer
+	{
+		function set dataProvider(o:*):void
+		function get dataProvider():*
+		function set state(o:Object):void
+		function get state():Object
+		function set labelField(str:String):void
+		function get labelField():String
+	}
+}

@@ -22,3 +22,39 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.layout.types
+{
+	import flash.display.DisplayObject;
+	import flash.utils.Dictionary;
+	
+	import razor.core.Metrics;
+	
+	public class NoLayout implements ILayoutImpl
+	{
+		private var maxWidth:Number = 0;
+		private var maxHeight:Number = 0;
+		
+		public function NoLayout()
+		{
+		}
+		
+		public function doLayout(children:Array, layoutDatas:Dictionary, width:Number, height:Number, margins:Metrics=null):void
+		{
+			// Dont do any layout, just measure the contents.
+			
+			maxWidth = 0;
+			maxHeight = 0;
+			for each ( var child:DisplayObject in children )
+            {
+            	maxWidth = Math.max(maxWidth, child.x + child.width);
+            	maxHeight = Math.max(maxHeight, child.y + child.height);
+            }
+		}
+		
+		public function getVisibleMetrics():Metrics
+		{
+			return new Metrics(maxWidth,maxHeight);
+		}
+	}
+}

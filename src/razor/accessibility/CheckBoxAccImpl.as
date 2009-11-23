@@ -22,3 +22,42 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.accessibility
+{
+	import flash.display.DisplayObject;
+	
+	import razor.controls.Button;
+	import razor.controls.CheckBox;
+
+	public class CheckBoxAccImpl extends ButtonAccImpl
+	{
+		protected static const STATE_SYSTEM_CHECKED:uint = 0x00000010;
+		
+		public function CheckBoxAccImpl(owner:DisplayObject, name:String=null, role:uint = 0x2c)
+		{
+			super(owner, name, role);
+			
+			_owner.addEventListener(CheckBox.E_SELECT, dispatchStateChange);
+		}
+		
+		override public function get_accState(childID:uint):uint
+		{
+			var state:uint = super.get_accState(childID);
+			
+			if (CheckBox(_owner).selected)
+			{
+				if (state & STATE_SYSTEM_PRESSED)
+				state ^= STATE_SYSTEM_PRESSED;
+				state |= STATE_SYSTEM_CHECKED;
+			}
+			
+			return state;
+		}
+		
+		override public function get_accDefaultAction(childID:uint):String
+		{
+			return Button(_owner).selected ? "UnCheck" : "Check";
+		}
+	}
+}

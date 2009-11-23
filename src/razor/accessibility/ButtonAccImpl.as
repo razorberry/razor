@@ -22,3 +22,32 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.accessibility
+{
+	import flash.display.DisplayObject;
+	
+	import razor.controls.Button;
+	
+	public class ButtonAccImpl extends BasicAccImpl
+	{
+		protected static const STATE_SYSTEM_PRESSED:uint = 0x00000008;
+		
+		public function ButtonAccImpl(owner:DisplayObject, name:String = null, role:uint = 0x2b)
+		{
+			super(owner, name, role);
+			
+			_owner.addEventListener(Button.E_CLICK, dispatchStateChange);
+		}
+		
+		override public function get_accState(childID:uint):uint
+		{
+			var state:uint = super.get_accState(childID);
+			
+			if (_owner is Button && Button(_owner).selected)
+				state |= STATE_SYSTEM_PRESSED;
+	
+			return state;
+		}
+	}
+}

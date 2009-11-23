@@ -22,3 +22,35 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.skins.stylesheets
+{
+	import razor.skins.StyleSheet;
+
+	/**
+	 * An abstract StyleSheet.
+	 */
+	public class RootStyleSheet extends StyleSheet
+	{
+		public var Arrow:StyleSheet;
+		public var Background:StyleSheet;
+		public var Button:StyleSheet = new ButtonStyles();
+		public var Calendar:StyleSheet = new CalendarStyles();
+		public var CheckBox:StyleSheet = new CheckBoxStyles();
+		public var CollapsiblePane:StyleSheet = new CollapsiblePaneStyles();
+		public var ColorPicker:StyleSheet = new ColorPickerStyles();
+		public var ColorSwatch:StyleSheet = new ColorSwatchStyles();
+		public var ComboBox:StyleSheet = new ComboBoxStyles();
+		public var DateChooser:StyleSheet = new DateChooserStyles();
+		public var Label:StyleSheet;
+		public var List:StyleSheet;
+		public var Overlay:StyleSheet;
+		public var Pane:StyleSheet = new PaneStyles();
+		public var ProgressBar:StyleSheet = new ProgressBarStyles();
+		public var RadioButton:StyleSheet = new RadioButtonStyles();
+		public var ScrollBar:StyleSheet = new ScrollBarStyles();
+		public var TextArea:StyleSheet = new TextAreaStyles();
+		public var TextInput:StyleSheet = new TextInputStyles();
+		public var ToolTip:StyleSheet = new ToolTipStyles();
+	}
+}

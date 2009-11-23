@@ -22,3 +22,70 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.core
+{
+	import flash.events.Event;
+	import flash.utils.Dictionary;
+	import flash.display.DisplayObject;
+	
+	/**
+	 * An extension of StyledContainer that provides additional depth management functions.
+	 * 
+	 */
+	public class DepthManagedContainer extends StyledContainer
+	{
+		private var onTop:Dictionary;
+		
+		/**
+		 * Contructor.
+		 */
+		public function DepthManagedContainer()
+		{
+		}
+		
+		/** @private */
+		protected function addChildAlwaysOnTop(child:DisplayObject):DisplayObject
+		{
+			onTop[child] = child;
+			return addChild(child);
+		}
+		
+		/** @private */
+		protected function getTopDepth():uint
+		{
+			var i:int = 0;
+			for each(var z:DisplayObject in onTop)
+				i++;
+				
+			return numChildren - 1 - i;
+		}
+		
+		/** @private */
+		override protected function construct():void
+		{
+			onTop = new Dictionary(true);
+			addEventListener(Event.ADDED, onAdd);
+			addEventListener(Event.REMOVED, onRemove);
+		}
+		
+		/** @private */
+		private function onAdd(e:Event):void
+		{
+			if (contains(e.target as DisplayObject))
+			{
+				for each (var z:DisplayObject in onTop)
+				{
+					setChildIndex(z, numChildren-1);
+				}
+			}
+		}
+		
+		/** @private */
+		private function onRemove(e:Event):void
+		{
+			if (onTop[e.target])
+				delete onTop[e.target];
+		}
+	}
+}

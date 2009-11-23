@@ -22,3 +22,22 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls.calendar 
+{
+	/**
+	 * Interface for a date renderer used in a Calendar control.
+	 */
+	public interface ICalendarDateRenderer extends ICalendarRenderer
+	{
+		function set isCurrent(b:Boolean):void;
+		function get isCurrent():Boolean;
+		
+		function set isOutOfMonth(b:Boolean):void;
+		function get isOutOfMonth():Boolean;
+		
+		function set isSelected(b:Boolean):void;
+		function get isSelected():Boolean;
+	}
+	
+}

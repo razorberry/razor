@@ -22,3 +22,21 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.controls
+{
+	import razor.layout.Layer;
+	
+	/**
+	 * A generic container with no layout implementation.
+	 */
+	public class Box extends Layer
+	{
+		/** @private */ override protected function getClass():String { return "Box"; }
+		
+		public function Box()
+		{
+			
+		}
+	}
+}

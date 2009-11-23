@@ -22,3 +22,33 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 *******************************************************************************/
+
+package razor.skins
+{
+	import razor.core.razor_internal;
+	import razor.core.StyledContainer;
+
+	/**
+	 * An empty container that you can use in skins to define an empty element.
+	 * @private
+	 */
+	public final class NullContainer extends StyledContainer
+	{
+		use namespace razor_internal;
+		razor_internal function getClass():String { return "NullContainer"; }
+		
+		public function NullContainer()
+		{
+			__frozen = true;
+		}
+		override protected function layout():void
+		{
+			
+		}
+		
+		override protected function construct():void
+		{
+			
+		}
+	}
+}
