@@ -1,0 +1,218 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>CheckBox.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptASDoc">/*****************************************************************************
+* Razor Component Framework for ActionScript 3.
+* Copyright 2009 Ashley Atkins (www.razorberry.com)
+* 
+* This file is part of the Razor Component Framework, which is made available
+* under the MIT License.
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*******************************************************************************/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controls</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">display</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">DisplayObject</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">display</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">InteractiveObject</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">events</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Event</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">text</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">TextFieldAutoSize</span>;
+    
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">accessibility</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CheckBoxAccImpl</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">InteractiveContainer</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Metrics</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">RazorEvent</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">razor_internal</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * Dispatched when the checkbox is selected/changes state.
+     * @eventType razor.controls.CheckBox.E_SELECT
+     */</span>
+    <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptMetadata">Event</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"select"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">type</span><span class="ActionScriptOperator">=</span><span class="ActionScriptString">"razor.core.RazorEvent"</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">]</span>
+    
+    <span class="ActionScriptASDoc">/**
+     * Component for a toggleable checkbox.
+     * @example
+     * &lt;listing version="3.0"&gt;
+     * package
+     * {
+     *     import razor.core.ControlFactory;
+     *     import razor.controls.CheckBox;
+     *     import razor.core.RazorEvent;
+     * 
+     *     public class CheckBoxExample extends flash.display.Sprite
+     *     {
+     *         public function CheckBoxExample()
+     *         {
+     *             var checkBox:CheckBox = ControlFactory.create(CheckBox) as CheckBox;
+     *             checkBox.setSize(300,24);
+     *             checkBox.label = "Check me!";
+     *             checkBox.addEventListener(CheckBox.E_SELECT, onCheck);
+     *             addChild(checkBox);
+     *         }
+     * 
+     *         protected function onCheck(e:RazorEvent):void
+     *         {
+     *             trace(e.selected);
+     *         }
+     *     }
+     * }
+     * &lt;/listing&gt;
+    */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">CheckBox</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">InteractiveContainer</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">use</span> <span class="ActionScriptReserved">namespace</span> <span class="ActionScriptDefault_Text">razor_internal</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">E_SELECT</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">Event</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">SELECT</span>;
+    
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">S_CHECKED</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptString">"Checked"</span>;
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptReserved">const</span> <span class="ActionScriptDefault_Text">S_UNCHECKED</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptString">"Unchecked"</span>;
+        
+        <span class="ActionScriptASDoc">/** @private */</span> <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">getClass</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptBracket/Brace">{</span> <span class="ActionScriptReserved">return</span> <span class="ActionScriptString">"CheckBox"</span>; <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_label</span>:<span class="ActionScriptDefault_Text">String</span>;
+        <span class="ActionScriptASDoc">/** @private */</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">_selected</span>:<span class="ActionScriptDefault_Text">Boolean</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+        
+        <span class="ActionScriptComment">////////////////////////////////////////////////////////////////////////////////////////
+</span>        <span class="ActionScriptComment">// PUBLIC METHODS
+</span>        
+        <span class="ActionScriptASDoc">/**
+        * Set the label for this checkbox
+        * @param    str        The label string
+        */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span>:<span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_label</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">str</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">getStateElement</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Label"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">addStates</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Label"</span><span class="ActionScriptOperator">,</span>2<span class="ActionScriptOperator">,</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">S_UNCHECKED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">S_CHECKED</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptDefault_Text">doLayout</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">String</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_label</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+        * Get/Set whether this checkbox is selected or not
+        * @param    b    A boolean representing whether the checkbox is selected.
+        */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">selected</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">b</span>:<span class="ActionScriptDefault_Text">Boolean</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">_selected</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">b</span>;
+            <span class="ActionScriptDefault_Text">setState</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">b</span> <span class="ActionScriptOperator">?</span> <span class="ActionScriptDefault_Text">S_CHECKED</span> : <span class="ActionScriptDefault_Text">S_UNCHECKED</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">layout</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">get</span> <span class="ActionScriptDefault_Text">selected</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">Boolean</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">_selected</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptComment">////////////////////////////////////////////////////////////////////////////////////////
+</span>        <span class="ActionScriptComment">// PRIVATE METHODS
+</span>        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">CheckBox</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">construct</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">addStates</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Background"</span><span class="ActionScriptOperator">,</span> 1<span class="ActionScriptOperator">,</span> <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">S_UNCHECKED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">S_CHECKED</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">_label</span> <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">_label</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span> <span class="ActionScriptOperator">&gt;</span> 0<span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">addStates</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Label"</span><span class="ActionScriptOperator">,</span> 2<span class="ActionScriptOperator">,</span> <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">S_UNCHECKED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">S_CHECKED</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">addStates</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Overlay"</span><span class="ActionScriptOperator">,</span> 3<span class="ActionScriptOperator">,</span> <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">S_UNCHECKED</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">S_CHECKED</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptDefault_Text">addEventListener</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">InteractiveContainer</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">E_CLICK</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">onClick</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">layout</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">box</span>:<span class="ActionScriptDefault_Text">DisplayObject</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">getStateElement</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Background"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">sizeChild</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">box</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">__height</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">__height</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">lbl</span>:<span class="ActionScriptDefault_Text">DisplayObject</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">getStateElement</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Label"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span> <span class="ActionScriptOperator">!=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Label</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">Label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">wordWrap</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">true</span>;
+                    <span class="ActionScriptDefault_Text">Label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">autoSize</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">TextFieldAutoSize</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">CENTER</span>;
+                    
+                    <span class="ActionScriptDefault_Text">Label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">text</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">_label</span> <span class="ActionScriptOperator">?</span> <span class="ActionScriptDefault_Text">_label</span> : <span class="ActionScriptString">""</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+                
+                <span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">width</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">__width</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptDefault_Text">__height</span> <span class="ActionScriptOperator">-</span> 5;
+                <span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">__height</span> <span class="ActionScriptOperator">+</span> 5;
+                <span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">__height</span> <span class="ActionScriptOperator">-</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Label</span> <span class="ActionScriptOperator">?</span> <span class="ActionScriptDefault_Text">Label</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">textHeight</span> : <span class="ActionScriptDefault_Text">lbl</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">height</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">/</span>2 <span class="ActionScriptOperator">-</span> 2;
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">check</span>:<span class="ActionScriptDefault_Text">DisplayObject</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">getStateElement</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Overlay"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">sizeChild</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">check</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">__height</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">__height</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">createAccessibilityImplementation</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">accessibilityImplementation</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">CheckBoxAccImpl</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">this</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">onClick</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">e</span>:<span class="ActionScriptDefault_Text">Event</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">selected</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">_selected</span>;
+            <span class="ActionScriptDefault_Text">dispatchEvent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">RazorEvent</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">E_SELECT</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptBracket/Brace">{</span><span class="ActionScriptDefault_Text">selected</span>: <span class="ActionScriptDefault_Text">_selected</span><span class="ActionScriptBracket/Brace">}</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptReserved">set</span> <span class="ActionScriptDefault_Text">enabled</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">b</span>:<span class="ActionScriptDefault_Text">Boolean</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">c</span>:<span class="ActionScriptDefault_Text">DisplayObject</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">getStateElement</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"Background"</span><span class="ActionScriptBracket/Brace">)</span>; 
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"enabled"</span> <span class="ActionScriptReserved">in</span> <span class="ActionScriptDefault_Text">c</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">c</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptString">"enabled"</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">b</span>;
+            <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">InteractiveObject</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptDefault_Text">InteractiveObject</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">mouseEnabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+            
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">enabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">b</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">setState</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">state</span>:<span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setState</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">state</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">enabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">enabled</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/** @private */</span>
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">getPreferredMetrics</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">Metrics</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Metrics</span><span class="ActionScriptBracket/Brace">(</span>0<span class="ActionScriptOperator">,</span>16<span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

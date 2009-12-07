@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<index>
+	<title>Source of RazorSamples</title>
+	<nodes>
+		<node icon="classpathIcon" label="[source path] src" expanded="true">
+			<node label="razor">
+			</node>
+		</node>
+		<node label="assets">
+			<node icon="imageIcon" label="background.png" url="source/assets/background.png.html"/>
+			<node label="background.psd" url="source/assets/background.psd"/>
+			<node label="button.psd" url="source/assets/button.psd"/>
+			<node icon="imageIcon" label="button_disabled.png" url="source/assets/button_disabled.png.html"/>
+			<node icon="imageIcon" label="button_down.png" url="source/assets/button_down.png.html"/>
+			<node icon="imageIcon" label="button_over.png" url="source/assets/button_over.png.html"/>
+			<node icon="imageIcon" label="button_up.png" url="source/assets/button_up.png.html"/>
+			<node label="maxine.ttf" url="source/assets/maxine.ttf"/>
+			<node icon="cssIcon" label="SourceStyles.css" url="source/assets/SourceStyles.css.html"/>
+		</node>
+		<node label="html-template">
+			<node icon="htmlIcon" label="index.template.html" url="source/html-template/index.template.html"/>
+			<node icon="swfIcon" label="playerProductInstall.swf" url="source/html-template/playerProductInstall.swf"/>
+			<node label="swfobject.js" url="source/html-template/swfobject.js.txt"/>
+		</node>
+		<node label="src">
+			<node icon="packageIcon" label="com.razorberry.razor.samples" expanded="true">
+				<node icon="actionScriptIcon" label="CheckItemRenderer.as" url="source/com/razorberry/razor/samples/CheckItemRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="MainView.as" url="source/com/razorberry/razor/samples/MainView.as.html"/>
+				<node icon="actionScriptIcon" label="SampleAssets.as" url="source/com/razorberry/razor/samples/SampleAssets.as.html"/>
+			</node>
+			<node icon="packageIcon" label="com.razorberry.razor.samples.examples" expanded="true">
+				<node icon="actionScriptIcon" label="BoxExample.as" url="source/com/razorberry/razor/samples/examples/BoxExample.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonExampleOne.as" url="source/com/razorberry/razor/samples/examples/ButtonExampleOne.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonExampleTwo.as" url="source/com/razorberry/razor/samples/examples/ButtonExampleTwo.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarExample.as" url="source/com/razorberry/razor/samples/examples/CalendarExample.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBoxExample.as" url="source/com/razorberry/razor/samples/examples/CheckBoxExample.as.html"/>
+				<node icon="actionScriptIcon" label="ColorPickerExample.as" url="source/com/razorberry/razor/samples/examples/ColorPickerExample.as.html"/>
+				<node icon="actionScriptIcon" label="ItemRendererExample.as" url="source/com/razorberry/razor/samples/examples/ItemRendererExample.as.html"/>
+				<node icon="actionScriptIcon" label="LabelExample.as" url="source/com/razorberry/razor/samples/examples/LabelExample.as.html"/>
+				<node icon="actionScriptIcon" label="ListExample.as" url="source/com/razorberry/razor/samples/examples/ListExample.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBarExample.as" url="source/com/razorberry/razor/samples/examples/ProgressBarExample.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressSkinningExample.as" url="source/com/razorberry/razor/samples/examples/ProgressSkinningExample.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBarExample.as" url="source/com/razorberry/razor/samples/examples/ScrollBarExample.as.html"/>
+				<node icon="actionScriptIcon" label="TextAreaExampleOne.as" url="source/com/razorberry/razor/samples/examples/TextAreaExampleOne.as.html"/>
+			</node>
+			<node icon="actionScriptIcon" label="ProgressIndicator.as" url="source/ProgressIndicator.as.html"/>
+			<node icon="mxmlAppIcon" selected="true" label="RazorSamples.as" url="source/RazorSamples.as.html"/>
+		</node>
+	</nodes>
+</index>

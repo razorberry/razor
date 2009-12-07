@@ -1,0 +1,220 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>RenderLayer.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptASDoc">/*****************************************************************************
+* Razor Component Framework for ActionScript 3.
+* Copyright 2009 Ashley Atkins (www.razorberry.com)
+* 
+* This file is part of the Razor Component Framework, which is made available
+* under the MIT License.
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*******************************************************************************/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">skins</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">StyledContainer</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">InteractiveContainer</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">IBordered</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">geom</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Matrix</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">display</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">GradientType</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Metrics</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">flash</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">display</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Graphics</span>;
+
+    <span class="ActionScriptASDoc">/**
+     * StyledContainer specifically intended for drawn graphics and no other functionality.
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">RenderLayer</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">StyledContainer</span>
+        <span class="ActionScriptReserved">implements</span> <span class="ActionScriptDefault_Text">IBordered</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">RenderLayer</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">//super(true);
+</span>            <span class="ActionScriptComment">//tabEnabled = false;
+</span>            <span class="ActionScriptDefault_Text">mouseEnabled</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">false</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+        * Draw a stylized rounded rectangle.
+        * @param    x    The X position of the top-left corner
+        * @param    y    The Y position of the top-left corner
+        * @param    w    The width of the rectangle
+        * @param    h    The height of the rectangle
+        * @param    r    The radius of the rounded corners, can be a number or object of the form {tl: X, tr: X, bl: X, br: X}
+        * @param    c    The fill color, can be a number or an array of colors in order to draw a gradient
+        * @param    alpha    The fill alpha, can be a number or an array of alphas corresponding to the array of colors.
+        * @param    rot        The rotation of the gradient in degrees, or the gradient matrix object:flash.geom.Matrix;
+        * @param    gradient    The type of gradient, "radial" or "linear".
+        * @param    ratios        The ratio array of the gradient.
+        * @param    border        The color of the border, (use -1 or undefined for no border)
+        * @param    thickness    The thickness of the border
+        */</span>
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">drawRect</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">x</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">y</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">w</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">h</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span>
+                                  <span class="ActionScriptDefault_Text">r</span>:<span class="ActionScriptOperator">*</span> <span class="ActionScriptOperator">=</span> 0<span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">c</span>:<span class="ActionScriptOperator">*</span> <span class="ActionScriptOperator">=</span> -1<span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">alpha</span>:<span class="ActionScriptOperator">*</span> <span class="ActionScriptOperator">=</span> 1<span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">rot</span>:<span class="ActionScriptOperator">*</span> <span class="ActionScriptOperator">=</span> 0<span class="ActionScriptOperator">,</span>
+                                  <span class="ActionScriptDefault_Text">gradient</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptString">"linear"</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">ratios</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">border</span>:<span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> -1<span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">thickness</span>:<span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> 1<span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">w</span> <span class="ActionScriptOperator">&gt;</span> 0 <span class="ActionScriptOperator">&amp;&amp;</span> <span class="ActionScriptDefault_Text">h</span> <span class="ActionScriptOperator">&gt;</span> 0<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span>;
+                
+            <span class="ActionScriptComment">//trace("drawrect: "+w+","+h);
+</span>            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">border</span> <span class="ActionScriptOperator">&gt;=</span> 0<span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptComment">// TODO: increase r proportional to border thickness
+</span>                <span class="ActionScriptComment">//trace("  (drawing border)");
+</span>                <span class="ActionScriptDefault_Text">drawRect</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">y</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">w</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">h</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">r</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">border</span><span class="ActionScriptOperator">,</span>1<span class="ActionScriptOperator">,</span><span class="ActionScriptReserved">null</span><span class="ActionScriptOperator">,</span><span class="ActionScriptReserved">null</span><span class="ActionScriptOperator">,</span><span class="ActionScriptReserved">null</span><span class="ActionScriptOperator">,</span><span class="ActionScriptOperator">-</span>1<span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">g</span>:<span class="ActionScriptDefault_Text">Graphics</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">graphics</span>;
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">rbr</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">rbl</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">rtl</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">rtr</span>:<span class="ActionScriptDefault_Text">Number</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">r</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">r</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">r</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">uint</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">r</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">br</span>; <span class="ActionScriptComment">//bottom right corner
+</span>                <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">r</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">bl</span>; <span class="ActionScriptComment">//bottom left corner
+</span>                <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">r</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">tl</span>; <span class="ActionScriptComment">//top left corner
+</span>                <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">r</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">tr</span>; <span class="ActionScriptComment">//top right corner
+</span>            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">else</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">r</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// Restrict roundedness to positive numbers
+</span>            <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rtl</span>;
+            <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rtr</span>;
+            <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rbl</span>;
+            <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rbr</span>;
+            
+            <span class="ActionScriptComment">// Restrict roundedness to available space only
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">m</span>:<span class="ActionScriptDefault_Text">Number</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">w</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">m</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">w</span><span class="ActionScriptOperator">/</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rtr</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+                <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">w</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">m</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">w</span><span class="ActionScriptOperator">/</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbr</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+                <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">h</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">m</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">h</span><span class="ActionScriptOperator">/</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbl</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+                <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">&gt;</span> <span class="ActionScriptDefault_Text">h</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">m</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">h</span><span class="ActionScriptOperator">/</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">+</span> <span class="ActionScriptDefault_Text">rbr</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+                <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">*=</span> <span class="ActionScriptDefault_Text">m</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptComment">// if color is an object then allow for complex fills
+</span>            <span class="ActionScriptReserved">if</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">uint</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">alphas</span>:<span class="ActionScriptDefault_Text">Array</span>;
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">alpha</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Array</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">alphas</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">alpha</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">alpha</span><span class="ActionScriptBracket/Brace">]</span>;
+                <span class="ActionScriptReserved">else</span>
+                    <span class="ActionScriptDefault_Text">alphas</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">alpha</span>;
+                
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">ratios</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptReserved">null</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">ratios</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">[</span> 0<span class="ActionScriptOperator">,</span> 0xff <span class="ActionScriptBracket/Brace">]</span>;
+    
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">sh</span>:<span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">h</span> <span class="ActionScriptOperator">*</span>.7
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">matrix</span>:<span class="ActionScriptDefault_Text">Matrix</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Matrix</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rot</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Number</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">rot</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">||</span> <span class="ActionScriptDefault_Text">rot</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">uint</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptDefault_Text">matrix</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">createGradientBox</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">w</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">h</span><span class="ActionScriptOperator">,</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rot</span> <span class="ActionScriptOperator">*</span> <span class="ActionScriptDefault_Text">Math</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PI</span><span class="ActionScriptOperator">/</span>180<span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">,</span>0<span class="ActionScriptOperator">,</span>0<span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptComment">//var matrix = {matrixType:"box", x:-sh, y:sh, w:w*2, h:h*4, r:rot * 0.0174532925199433 }
+</span>                <span class="ActionScriptBracket/Brace">}</span>
+                <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">rot</span> <span class="ActionScriptReserved">is</span> <span class="ActionScriptDefault_Text">Matrix</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">matrix</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rot</span>;
+            
+                <span class="ActionScriptComment">//debug(alphas+"\n"+ratios+"\n"+matrix);
+</span>                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">gradient</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptString">"radial"</span><span class="ActionScriptBracket/Brace">)</span>
+                    <span class="ActionScriptDefault_Text">g</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">beginGradientFill</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">GradientType</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">RADIAL</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">c</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">alphas</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ratios</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">matrix</span> <span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptReserved">else</span>
+                    <span class="ActionScriptDefault_Text">g</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">beginGradientFill</span><span class="ActionScriptBracket/Brace">(</span> <span class="ActionScriptDefault_Text">GradientType</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">LINEAR</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">c</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">alphas</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ratios</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">matrix</span> <span class="ActionScriptBracket/Brace">)</span>;
+    
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptOperator">&gt;=</span> 0<span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">g</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">beginFill</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">alpha</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+    
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">border</span> <span class="ActionScriptOperator">&gt;=</span> 0<span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">x</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+                <span class="ActionScriptDefault_Text">y</span> <span class="ActionScriptOperator">+=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+                <span class="ActionScriptDefault_Text">w</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span><span class="ActionScriptOperator">*</span>2;
+                <span class="ActionScriptDefault_Text">h</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span><span class="ActionScriptOperator">*</span>2;
+                <span class="ActionScriptComment">// Modify roundness depending on border thickness
+</span>                <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+                <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+                <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+                <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">-=</span> <span class="ActionScriptDefault_Text">thickness</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+    
+            <span class="ActionScriptComment">// No negative rounded corners
+</span>            <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtl</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rtl</span>;
+            <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rtr</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rtr</span>;
+            <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rbl</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rbl</span>;
+            <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">rbr</span> <span class="ActionScriptOperator">&lt;</span> 0 <span class="ActionScriptOperator">?</span> 0 : <span class="ActionScriptDefault_Text">rbr</span>;
+    
+            <span class="ActionScriptDefault_Text">g</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">drawRoundRectComplex</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">x</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">y</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">w</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">h</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">rtl</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">rtr</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">rbl</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">rbr</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">c</span> <span class="ActionScriptOperator">&gt;=</span> 0<span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptDefault_Text">g</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">endFill</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+        * Draw a simple rectangle between two points
+        * @param    x1    The X position of the top-left corner
+        * @param    y1    The Y position of the top-left corner
+        * @param    x2    The X position of the bottom-right corner
+        * @param    y2    The Y position of the bottom-right corner
+        */</span>
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptReserved">final</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">drawSimpleRect</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">x1</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">y1</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">x2</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">y2</span>:<span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">graphics</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">drawRect</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">x1</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">y1</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">x2</span><span class="ActionScriptOperator">-</span><span class="ActionScriptDefault_Text">x1</span><span class="ActionScriptOperator">,</span><span class="ActionScriptDefault_Text">y2</span><span class="ActionScriptOperator">-</span><span class="ActionScriptDefault_Text">y1</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptASDoc">/**
+        * Get the inner dimensions for this graphic
+        * @private
+        * @return    A Matrics instance
+        */</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">getBorderMetrics</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">Metrics</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Metrics</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

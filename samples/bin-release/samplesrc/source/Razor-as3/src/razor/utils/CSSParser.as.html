@@ -1,0 +1,117 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>CSSParser.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptASDoc">/*****************************************************************************
+* Razor Component Framework for ActionScript 3.
+* Copyright 2009 Ashley Atkins (www.razorberry.com)
+* 
+* This file is part of the Razor Component Framework, which is made available
+* under the MIT License.
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+*******************************************************************************/</span>
+
+<span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">utils</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">skins</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">StyleSheet</span>;
+    
+    <span class="ActionScriptASDoc">/**
+     * Experimental and incomplete css parser.
+     */</span>
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">CSSParser</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">parseCSS</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span>:<span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptDefault_Text">StyleSheet</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">// First create a stylesheet to attach all of our rules to
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">ss</span>:<span class="ActionScriptDefault_Text">StyleSheet</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">StyleSheet</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptComment">//var css:String = "  Blah     { \r\n whee : 15 px; \r\n  /* another comment */    yay: #ffbb00 \r\n } /* Comment\r\n  */ \r\n   Bike  Pedal // Bike pedal! \r\n{ woo: 23 }";
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">css</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">str</span>;
+            <span class="ActionScriptComment">// Remove comments..
+</span>            <span class="ActionScriptDefault_Text">css</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">css</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/\/\*.*?\*\//gms</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">css</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">css</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/\/\/.*$/gm</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptComment">//trace(css);
+</span>            <span class="ActionScriptComment">// Grab the rules by matching the brackets
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">arr</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">css</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">match</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/(.*?{.*?})/gms</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">finalRules</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Array</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">for</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">i</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 0; <span class="ActionScriptDefault_Text">i</span> <span class="ActionScriptOperator">&lt;</span> <span class="ActionScriptDefault_Text">arr</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span>; <span class="ActionScriptDefault_Text">i</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">oo</span>:<span class="ActionScriptDefault_Text">Object</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Object</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">parts</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">arr</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">i</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">split</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"{"</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptComment">// Grab the selector, and the rules.
+</span>                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">sel</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">parts</span><span class="ActionScriptBracket/Brace">[</span>0<span class="ActionScriptBracket/Brace">]</span>;
+                <span class="ActionScriptComment">// Trim surrounding whitespace
+</span>                <span class="ActionScriptDefault_Text">sel</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">sel</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/^\s+|\s+$/g</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptComment">// Condense internal whitespace
+</span>                <span class="ActionScriptDefault_Text">sel</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">sel</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/(\S\s)\s+/</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"$1"</span><span class="ActionScriptBracket/Brace">)</span>;
+                
+                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">styles</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">parts</span><span class="ActionScriptBracket/Brace">[</span>1<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptComment">// Match name:value pairs
+</span>                <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">b</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">styles</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">match</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/[\w-]+\s*?:\s*?.*?[\r\n;}]$/gms</span><span class="ActionScriptBracket/Brace">)</span>;
+                
+                <span class="ActionScriptReserved">for</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">j</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 0; <span class="ActionScriptDefault_Text">j</span> <span class="ActionScriptOperator">&lt;</span> <span class="ActionScriptDefault_Text">b</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span>; <span class="ActionScriptDefault_Text">j</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptBracket/Brace">{</span>
+                    <span class="ActionScriptComment">// Trim spaces, closing brackets, and semi colons, then split at the colon:
+</span>                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">styleArr</span>:<span class="ActionScriptDefault_Text">Array</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">b</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">j</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/^\s+|\s+$|[};]/gms</span><span class="ActionScriptOperator">,</span><span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">split</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">":"</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptComment">// Trim out all spaces from the name.
+</span>                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">styleName</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">styleArr</span><span class="ActionScriptBracket/Brace">[</span>0<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/\s/</span><span class="ActionScriptOperator">,</span><span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptComment">// Trim spaces from the value.
+</span>                    <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">styleValue</span>:<span class="ActionScriptDefault_Text">String</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">styleArr</span><span class="ActionScriptBracket/Brace">[</span>1<span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/^\s+|\s+$/g</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;
+                    <span class="ActionScriptComment">// TODO: split multiple values into an array
+</span>                    
+                    <span class="ActionScriptDefault_Text">oo</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">styleName</span><span class="ActionScriptBracket/Brace">]</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">convertType</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">styleValue</span><span class="ActionScriptBracket/Brace">)</span>;
+                <span class="ActionScriptBracket/Brace">}</span>
+                <span class="ActionScriptDefault_Text">finalRules</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">push</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">{</span><span class="ActionScriptDefault_Text">name</span>: <span class="ActionScriptDefault_Text">sel</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">styles</span>: <span class="ActionScriptDefault_Text">oo</span><span class="ActionScriptBracket/Brace">}</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            
+            <span class="ActionScriptReserved">for</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">k</span>:<span class="ActionScriptDefault_Text">int</span> <span class="ActionScriptOperator">=</span> 0; <span class="ActionScriptDefault_Text">k</span> <span class="ActionScriptOperator">&lt;</span> <span class="ActionScriptDefault_Text">finalRules</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">length</span>; <span class="ActionScriptDefault_Text">k</span><span class="ActionScriptOperator">++</span><span class="ActionScriptBracket/Brace">)</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptDefault_Text">ss</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addRule</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">finalRules</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">k</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">name</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">StyleSheet</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">finalRules</span><span class="ActionScriptBracket/Brace">[</span><span class="ActionScriptDefault_Text">k</span><span class="ActionScriptBracket/Brace">]</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">styles</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptBracket/Brace">}</span>
+            <span class="ActionScripttrace">trace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"asdf"</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">ss</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">private</span> <span class="ActionScriptReserved">static</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">convertType</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span>:<span class="ActionScriptDefault_Text">String</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptOperator">*</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">// Remove px/pt/em from any numbers:
+</span>            <span class="ActionScriptDefault_Text">str</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">str</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/(\d+?)\s*?(px|pt|em)/</span><span class="ActionScriptOperator">,</span><span class="ActionScriptString">"$1"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptComment">// Convert #color values to a hex number
+</span>            <span class="ActionScriptDefault_Text">str</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">str</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/#([\dabcdef]+?)/g</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"0x$1"</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptOperator">!</span><span class="ActionScriptDefault_Text">isNaN</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>
+                <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">Number</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">else</span>
+            <span class="ActionScriptBracket/Brace">{</span>
+                <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptString">"true"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">true</span>;
+                <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">if</span> <span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">str</span> <span class="ActionScriptOperator">==</span> <span class="ActionScriptString">"false"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">return</span> <span class="ActionScriptReserved">false</span>;
+                <span class="ActionScriptReserved">else</span> <span class="ActionScriptReserved">return</span> <span class="ActionScriptDefault_Text">str</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">replace</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">/^"+|"+$/gms</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">""</span><span class="ActionScriptBracket/Brace">)</span>;  <span class="ActionScriptComment">// remove start and end quotes from strings
+</span>            <span class="ActionScriptBracket/Brace">}</span>
+        <span class="ActionScriptBracket/Brace">}</span>
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>

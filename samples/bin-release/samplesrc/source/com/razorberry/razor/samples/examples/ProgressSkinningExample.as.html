@@ -1,0 +1,67 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>ProgressSkinningExample.as</title>
+<link rel="stylesheet" type="text/css" href="../../../../../../SourceStyles.css"/>
+</head>
+
+<body><pre><span class="ActionScriptpackage">package</span> <span class="ActionScriptDefault_Text">com</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">razorberry</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">samples</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">examples</span>
+<span class="ActionScriptBracket/Brace">{</span>
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">controls</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ProgressBar</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Container</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">core</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">ControlFactory</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">skins</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">StyleSheet</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">skins</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">plastic</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">PlasticStyleSheet</span>;
+    <span class="ActionScriptReserved">import</span> <span class="ActionScriptDefault_Text">razor</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">skins</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">plastic</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">presets</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">Glass</span>;
+
+    <span class="ActionScriptReserved">public</span> <span class="ActionScriptclass">class</span> <span class="ActionScriptDefault_Text">ProgressSkinningExample</span> <span class="ActionScriptReserved">extends</span> <span class="ActionScriptDefault_Text">Container</span>
+    <span class="ActionScriptBracket/Brace">{</span>
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">controlFactory</span>:<span class="ActionScriptDefault_Text">ControlFactory</span>;
+        
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">bar1</span>:<span class="ActionScriptDefault_Text">ProgressBar</span>;
+        
+        <span class="ActionScriptReserved">public</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">ProgressSkinningExample</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">// NOTE: In our sample application we create a new ControlFactory
+</span>            <span class="ActionScriptComment">// for each example. You normally wouldn't need to do this.
+</span>            <span class="ActionScriptDefault_Text">controlFactory</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">ControlFactory</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">controlFactory</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rootStyleSheet</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">PlasticStyleSheet</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">controlFactory</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">defaultStyle</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">Glass</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            
+            <span class="ActionScriptDefault_Text">setStyles</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptReserved">super</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">setStyles</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">// NOTE: In our sample application we created a new ControlFactory
+</span>            <span class="ActionScriptComment">// for each example. You can also get a reference to the global rootStyleSheet
+</span>            <span class="ActionScriptComment">// from: Settings.rootStyleSheet  OR  ControlFactory.defaultFactory.rootStyleSheet
+</span>            <span class="ActionScriptvar">var</span> <span class="ActionScriptDefault_Text">sheet</span>:<span class="ActionScriptDefault_Text">StyleSheet</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">controlFactory</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">rootStyleSheet</span>;
+            
+            <span class="ActionScriptDefault_Text">sheet</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addRule</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"bar1"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">StyleSheet</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">{</span><span class="ActionScriptDefault_Text">bevel</span>: 6<span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">align</span>: <span class="ActionScriptString">"center"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">bold</span>: <span class="ActionScriptReserved">true</span><span class="ActionScriptBracket/Brace">}</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">sheet</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">addRule</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptString">"bar1 Bar"</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptReserved">new</span> <span class="ActionScriptDefault_Text">StyleSheet</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptReserved">null</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptDefault_Text">ProgressIndicator</span><span class="ActionScriptBracket/Brace">)</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">construct</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptComment">// Here we use our custom controlFactory instance.
+</span>            <span class="ActionScriptComment">// You could also use the static ControlFactory.create(...) method
+</span>            <span class="ActionScriptDefault_Text">bar1</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptDefault_Text">controlFactory</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">create</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">ProgressBar</span><span class="ActionScriptOperator">,</span> <span class="ActionScriptString">"bar1"</span><span class="ActionScriptBracket/Brace">)</span> <span class="ActionScriptReserved">as</span> <span class="ActionScriptDefault_Text">ProgressBar</span>;
+            <span class="ActionScriptDefault_Text">bar1</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">label</span> <span class="ActionScriptOperator">=</span> <span class="ActionScriptString">"Please wait"</span>;
+            <span class="ActionScriptDefault_Text">bar1</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">progress</span> <span class="ActionScriptOperator">=</span> 1;
+            <span class="ActionScriptDefault_Text">addChild</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">bar1</span><span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        <span class="ActionScriptReserved">override</span> <span class="ActionScriptReserved">protected</span> <span class="ActionScriptfunction">function</span> <span class="ActionScriptDefault_Text">layout</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptBracket/Brace">)</span>:<span class="ActionScriptReserved">void</span>
+        <span class="ActionScriptBracket/Brace">{</span>
+            <span class="ActionScriptDefault_Text">bar1</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">setSize</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">__width</span><span class="ActionScriptOperator">*</span>2<span class="ActionScriptOperator">/</span>3<span class="ActionScriptOperator">,</span> 28<span class="ActionScriptBracket/Brace">)</span>;
+            <span class="ActionScriptDefault_Text">bar1</span><span class="ActionScriptOperator">.</span><span class="ActionScriptDefault_Text">move</span><span class="ActionScriptBracket/Brace">(</span><span class="ActionScriptDefault_Text">__width</span><span class="ActionScriptOperator">/</span>6<span class="ActionScriptOperator">,</span> 10<span class="ActionScriptBracket/Brace">)</span>;
+        <span class="ActionScriptBracket/Brace">}</span>
+        
+        
+    <span class="ActionScriptBracket/Brace">}</span>
+<span class="ActionScriptBracket/Brace">}</span></pre></body>
+</html>
