@@ -103,7 +103,7 @@ package razor.skins
 				name = name.substring(0,i);
 				
 				subSheetArray = getStyleSheet(name, null, true);
-				if (subSheetArray.length > 0)
+				if (subSheetArray && subSheetArray.length > 0)
 					subSheet = subSheetArray[0];
 				if (subSheet != null)
 				{
@@ -139,7 +139,7 @@ package razor.skins
 			else
 			{
 				subSheetArray = getStyleSheet(name, null, true);
-				if (subSheetArray.length > 0)
+				if (subSheetArray && subSheetArray.length > 0)
 					subSheet = subSheetArray[0];
 				if (subSheet != null)
 				{
