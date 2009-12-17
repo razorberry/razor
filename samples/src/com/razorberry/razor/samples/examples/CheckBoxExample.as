@@ -5,7 +5,6 @@ package com.razorberry.razor.samples.examples
 	import razor.controls.RadioGroup;
 	import razor.core.Container;
 	import razor.core.ControlFactory;
-	import razor.skins.StyleSheet;
 	import razor.skins.plastic.PlasticStyleSheet;
 	import razor.skins.plastic.presets.Regular;
 
@@ -66,19 +65,20 @@ package com.razorberry.razor.samples.examples
 		
 		override protected function layout():void
 		{
-			checkBox1.setSize(__width/2 - 20, 20);
+			var w:Number = Math.round(__width/2) - 20;
+			checkBox1.setSize(w, 18);
 			checkBox1.move(10, 10);
-			checkBox2.setSize(__width/2 - 20, 20);
+			checkBox2.setSize(w, 18);
 			checkBox2.move(10, 40);
-			checkBox3.setSize(__width/2 - 20, 20);
+			checkBox3.setSize(w, 18);
 			checkBox3.move(10, 70);
 			
-			radio1.setSize(__width/2 - 20, 20);
-			radio1.move(__width/2 + 10, 10);
-			radio2.setSize(__width/2 - 20, 20);
-			radio2.move(__width/2 + 10, 40);
-			radio3.setSize(__width/2 - 20, 20);
-			radio3.move(__width/2 + 10, 70);
+			radio1.setSize(w, 18);
+			radio1.move(w + 30, 10);
+			radio2.setSize(w, 18);
+			radio2.move(w + 30, 40);
+			radio3.setSize(w, 18);
+			radio3.move(w + 30, 70);
 		}
 		
 		

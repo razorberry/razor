@@ -3,7 +3,195 @@
 	<title>Source of RazorSamples</title>
 	<nodes>
 		<node icon="classpathIcon" label="[source path] src" expanded="true">
-			<node label="razor">
+			<node icon="packageIcon" label="razor.accessibility" expanded="true">
+				<node icon="actionScriptIcon" label="AccRoles.as" url="source/Razor-as3/src/razor/accessibility/AccRoles.as.html"/>
+				<node icon="actionScriptIcon" label="BasicAccImpl.as" url="source/Razor-as3/src/razor/accessibility/BasicAccImpl.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonAccImpl.as" url="source/Razor-as3/src/razor/accessibility/ButtonAccImpl.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBoxAccImpl.as" url="source/Razor-as3/src/razor/accessibility/CheckBoxAccImpl.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.adapters.degrafa" expanded="true">
+				<node icon="actionScriptIcon" label="RazorDegrafaSurface.as" url="source/Razor-as3/src/razor/adapters/degrafa/RazorDegrafaSurface.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.adapters.flash" expanded="true">
+				<node icon="actionScriptIcon" label="PlasticSkin.as" url="source/Razor-as3/src/razor/adapters/flash/PlasticSkin.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.adapters.flex" expanded="true">
+				<node icon="actionScriptIcon" label="RazorFlexWrapper.as" url="source/Razor-as3/src/razor/adapters/flex/RazorFlexWrapper.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.controls" expanded="true">
+				<node icon="actionScriptIcon" label="Accordion.as" url="source/Razor-as3/src/razor/controls/Accordion.as.html"/>
+				<node icon="actionScriptIcon" label="Application.as" url="source/Razor-as3/src/razor/controls/Application.as.html"/>
+				<node icon="actionScriptIcon" label="Box.as" url="source/Razor-as3/src/razor/controls/Box.as.html"/>
+				<node icon="actionScriptIcon" label="Button.as" url="source/Razor-as3/src/razor/controls/Button.as.html"/>
+				<node icon="actionScriptIcon" label="Calendar.as" url="source/Razor-as3/src/razor/controls/Calendar.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBox.as" url="source/Razor-as3/src/razor/controls/CheckBox.as.html"/>
+				<node icon="actionScriptIcon" label="ColorPicker.as" url="source/Razor-as3/src/razor/controls/ColorPicker.as.html"/>
+				<node icon="actionScriptIcon" label="ColorSwatch.as" url="source/Razor-as3/src/razor/controls/ColorSwatch.as.html"/>
+				<node icon="actionScriptIcon" label="ComboBox.as" url="source/Razor-as3/src/razor/controls/ComboBox.as.html"/>
+				<node icon="actionScriptIcon" label="DateChooser.as" url="source/Razor-as3/src/razor/controls/DateChooser.as.html"/>
+				<node icon="actionScriptIcon" label="HBox.as" url="source/Razor-as3/src/razor/controls/HBox.as.html"/>
+				<node icon="actionScriptIcon" label="Image.as" url="source/Razor-as3/src/razor/controls/Image.as.html"/>
+				<node icon="actionScriptIcon" label="Label.as" url="source/Razor-as3/src/razor/controls/Label.as.html"/>
+				<node icon="actionScriptIcon" label="List.as" url="source/Razor-as3/src/razor/controls/List.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBar.as" url="source/Razor-as3/src/razor/controls/ProgressBar.as.html"/>
+				<node icon="actionScriptIcon" label="RadioButton.as" url="source/Razor-as3/src/razor/controls/RadioButton.as.html"/>
+				<node icon="actionScriptIcon" label="RadioGroup.as" url="source/Razor-as3/src/razor/controls/RadioGroup.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBar.as" url="source/Razor-as3/src/razor/controls/ScrollBar.as.html"/>
+				<node icon="actionScriptIcon" label="TextArea.as" url="source/Razor-as3/src/razor/controls/TextArea.as.html"/>
+				<node icon="actionScriptIcon" label="TextInput.as" url="source/Razor-as3/src/razor/controls/TextInput.as.html"/>
+				<node icon="actionScriptIcon" label="VBox.as" url="source/Razor-as3/src/razor/controls/VBox.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.controls.calendar" expanded="true">
+				<node icon="actionScriptIcon" label="CalendarDateRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/CalendarDateRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarDayHeaderRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/CalendarDayHeaderRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarEvent.as" url="source/Razor-as3/src/razor/controls/calendar/CalendarEvent.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarHeaderRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/CalendarHeaderRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="ICalendarDateRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/ICalendarDateRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="ICalendarEvent.as" url="source/Razor-as3/src/razor/controls/calendar/ICalendarEvent.as.html"/>
+				<node icon="actionScriptIcon" label="ICalendarEventRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/ICalendarEventRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="ICalendarRenderer.as" url="source/Razor-as3/src/razor/controls/calendar/ICalendarRenderer.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.controls.grid" expanded="true">
+				<node icon="actionScriptIcon" label="Cell.as" url="source/Razor-as3/src/razor/controls/grid/Cell.as.html"/>
+				<node icon="actionScriptIcon" label="ICellRenderer.as" url="source/Razor-as3/src/razor/controls/grid/ICellRenderer.as.html"/>
+				<node icon="actionScriptIcon" label="ListBase.as" url="source/Razor-as3/src/razor/controls/grid/ListBase.as.html"/>
+				<node icon="actionScriptIcon" label="SelectableCell.as" url="source/Razor-as3/src/razor/controls/grid/SelectableCell.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.core" expanded="true">
+				<node icon="actionScriptIcon" label="AssetCache.as" url="source/Razor-as3/src/razor/core/AssetCache.as.html"/>
+				<node icon="actionScriptIcon" label="Container.as" url="source/Razor-as3/src/razor/core/Container.as.html"/>
+				<node icon="actionScriptIcon" label="ControlFactory.as" url="source/Razor-as3/src/razor/core/ControlFactory.as.html"/>
+				<node icon="actionScriptIcon" label="CornerMetrics.as" url="source/Razor-as3/src/razor/core/CornerMetrics.as.html"/>
+				<node icon="actionScriptIcon" label="DepthManagedContainer.as" url="source/Razor-as3/src/razor/core/DepthManagedContainer.as.html"/>
+				<node icon="actionScriptIcon" label="IBordered.as" url="source/Razor-as3/src/razor/core/IBordered.as.html"/>
+				<node icon="actionScriptIcon" label="InteractiveContainer.as" url="source/Razor-as3/src/razor/core/InteractiveContainer.as.html"/>
+				<node icon="actionScriptIcon" label="ListContainer.as" url="source/Razor-as3/src/razor/core/ListContainer.as.html"/>
+				<node icon="actionScriptIcon" label="Metrics.as" url="source/Razor-as3/src/razor/core/Metrics.as.html"/>
+				<node icon="actionScriptIcon" label="razor_internal.as" url="source/Razor-as3/src/razor/core/razor_internal.as.html"/>
+				<node icon="actionScriptIcon" label="RazorEvent.as" url="source/Razor-as3/src/razor/core/RazorEvent.as.html"/>
+				<node icon="actionScriptIcon" label="StyledContainer.as" url="source/Razor-as3/src/razor/core/StyledContainer.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.core.tooltips" expanded="true">
+				<node icon="actionScriptIcon" label="BasicTooltip.as" url="source/Razor-as3/src/razor/core/tooltips/BasicTooltip.as.html"/>
+				<node icon="actionScriptIcon" label="ITooltip.as" url="source/Razor-as3/src/razor/core/tooltips/ITooltip.as.html"/>
+				<node icon="actionScriptIcon" label="TooltipData.as" url="source/Razor-as3/src/razor/core/tooltips/TooltipData.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.graphics" expanded="true">
+				<node icon="actionScriptIcon" label="Arrow.as" url="source/Razor-as3/src/razor/graphics/Arrow.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarIcon.as" url="source/Razor-as3/src/razor/graphics/CalendarIcon.as.html"/>
+				<node icon="actionScriptIcon" label="Check.as" url="source/Razor-as3/src/razor/graphics/Check.as.html"/>
+				<node icon="actionScriptIcon" label="Radio.as" url="source/Razor-as3/src/razor/graphics/Radio.as.html"/>
+				<node icon="actionScriptIcon" label="SpeechBubble.as" url="source/Razor-as3/src/razor/graphics/SpeechBubble.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.layout" expanded="true">
+				<node icon="actionScriptIcon" label="CollapsiblePane.as" url="source/Razor-as3/src/razor/layout/CollapsiblePane.as.html"/>
+				<node icon="actionScriptIcon" label="HidablePane.as" url="source/Razor-as3/src/razor/layout/HidablePane.as.html"/>
+				<node icon="actionScriptIcon" label="Layer.as" url="source/Razor-as3/src/razor/layout/Layer.as.html"/>
+				<node icon="actionScriptIcon" label="LayoutData.as" url="source/Razor-as3/src/razor/layout/LayoutData.as.html"/>
+				<node icon="actionScriptIcon" label="ModalLayer.as" url="source/Razor-as3/src/razor/layout/ModalLayer.as.html"/>
+				<node icon="actionScriptIcon" label="Pane.as" url="source/Razor-as3/src/razor/layout/Pane.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollArea.as" url="source/Razor-as3/src/razor/layout/ScrollArea.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.layout.types" expanded="true">
+				<node icon="actionScriptIcon" label="HorizontalLayout.as" url="source/Razor-as3/src/razor/layout/types/HorizontalLayout.as.html"/>
+				<node icon="actionScriptIcon" label="ILayoutImpl.as" url="source/Razor-as3/src/razor/layout/types/ILayoutImpl.as.html"/>
+				<node icon="actionScriptIcon" label="NoLayout.as" url="source/Razor-as3/src/razor/layout/types/NoLayout.as.html"/>
+				<node icon="actionScriptIcon" label="RowBasedLayout.as" url="source/Razor-as3/src/razor/layout/types/RowBasedLayout.as.html"/>
+				<node icon="actionScriptIcon" label="VerticalLayout.as" url="source/Razor-as3/src/razor/layout/types/VerticalLayout.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins" expanded="true">
+				<node icon="actionScriptIcon" label="NullContainer.as" url="source/Razor-as3/src/razor/skins/NullContainer.as.html"/>
+				<node icon="actionScriptIcon" label="RenderLayer.as" url="source/Razor-as3/src/razor/skins/RenderLayer.as.html"/>
+				<node icon="actionScriptIcon" label="Settings.as" url="source/Razor-as3/src/razor/skins/Settings.as.html"/>
+				<node icon="actionScriptIcon" label="SkinBitmap.as" url="source/Razor-as3/src/razor/skins/SkinBitmap.as.html"/>
+				<node icon="actionScriptIcon" label="Style.as" url="source/Razor-as3/src/razor/skins/Style.as.html"/>
+				<node icon="actionScriptIcon" label="StyleSheet.as" url="source/Razor-as3/src/razor/skins/StyleSheet.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins.minimal" expanded="true">
+				<node icon="actionScriptIcon" label="MinimalRectangle.as" url="source/Razor-as3/src/razor/skins/minimal/MinimalRectangle.as.html"/>
+				<node icon="actionScriptIcon" label="MinimalStyleSheet.as" url="source/Razor-as3/src/razor/skins/minimal/MinimalStyleSheet.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins.plastic" expanded="true">
+				<node icon="actionScriptIcon" label="LabelledBorder.as" url="source/Razor-as3/src/razor/skins/plastic/LabelledBorder.as.html"/>
+				<node icon="actionScriptIcon" label="PlasticStyleSheet.as" url="source/Razor-as3/src/razor/skins/plastic/PlasticStyleSheet.as.html"/>
+				<node icon="actionScriptIcon" label="Rectangle.as" url="source/Razor-as3/src/razor/skins/plastic/Rectangle.as.html"/>
+				<node icon="actionScriptIcon" label="RectangleGloss.as" url="source/Razor-as3/src/razor/skins/plastic/RectangleGloss.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins.plastic.presets" expanded="true">
+				<node icon="actionScriptIcon" label="Bubblegum.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Bubblegum.as.html"/>
+				<node icon="actionScriptIcon" label="Default.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Default.as.html"/>
+				<node icon="actionScriptIcon" label="Glass.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Glass.as.html"/>
+				<node icon="actionScriptIcon" label="Midnight.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Midnight.as.html"/>
+				<node icon="actionScriptIcon" label="Plain.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Plain.as.html"/>
+				<node icon="actionScriptIcon" label="Regular.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Regular.as.html"/>
+				<node icon="actionScriptIcon" label="Sharp.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Sharp.as.html"/>
+				<node icon="actionScriptIcon" label="Winter.as" url="source/Razor-as3/src/razor/skins/plastic/presets/Winter.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins.plastic.stylesheets" expanded="true">
+				<node icon="actionScriptIcon" label="ArrowStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ArrowStyles.as.html"/>
+				<node icon="actionScriptIcon" label="BackgroundDisabledStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/BackgroundDisabledStyles.as.html"/>
+				<node icon="actionScriptIcon" label="BackgroundDownStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/BackgroundDownStyles.as.html"/>
+				<node icon="actionScriptIcon" label="BackgroundOverStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/BackgroundOverStyles.as.html"/>
+				<node icon="actionScriptIcon" label="BackgroundStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/BackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonLabelDownStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ButtonLabelDownStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonLabelOverStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ButtonLabelOverStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonLabelStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ButtonLabelStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarDateStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CalendarDateStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarDayHeaderStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CalendarDayHeaderStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarHeaderStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CalendarHeaderStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CalendarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBoxOverlayStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CheckBoxOverlayStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBoxStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CheckBoxStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CollapsiblePaneStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/CollapsiblePaneStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ColorPickerStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ColorPickerStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ComboBoxStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ComboBoxStyles.as.html"/>
+				<node icon="actionScriptIcon" label="DateChooserStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/DateChooserStyles.as.html"/>
+				<node icon="actionScriptIcon" label="InsetBackgroundStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/InsetBackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="LabelStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/LabelStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ListCellButtonStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ListCellButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ListCellStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ListCellStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ListStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ListStyles.as.html"/>
+				<node icon="actionScriptIcon" label="OverlayStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/OverlayStyles.as.html"/>
+				<node icon="actionScriptIcon" label="PaneStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/PaneStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBarBackgroundStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ProgressBarBackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBarBarStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ProgressBarBarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBarStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ProgressBarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="RadioButtonBackgroundStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/RadioButtonBackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="RadioButtonOverlayStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/RadioButtonOverlayStyles.as.html"/>
+				<node icon="actionScriptIcon" label="RadioButtonStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/RadioButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBarBackgroundStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ScrollBarBackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBarButtonStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ScrollBarButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBarStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/ScrollBarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="TextInputStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/TextInputStyles.as.html"/>
+				<node icon="actionScriptIcon" label="TooltipStyles.as" url="source/Razor-as3/src/razor/skins/plastic/stylesheets/TooltipStyles.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.skins.stylesheets" expanded="true">
+				<node icon="actionScriptIcon" label="ArrowStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ArrowStyles.as.html"/>
+				<node icon="actionScriptIcon" label="BackgroundStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/BackgroundStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ButtonStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CalendarStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/CalendarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CheckBoxStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/CheckBoxStyles.as.html"/>
+				<node icon="actionScriptIcon" label="CollapsiblePaneStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/CollapsiblePaneStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ColorPickerStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ColorPickerStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ColorSwatchStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ColorSwatchStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ComboBoxStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ComboBoxStyles.as.html"/>
+				<node icon="actionScriptIcon" label="DateChooserStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/DateChooserStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ListStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ListStyles.as.html"/>
+				<node icon="actionScriptIcon" label="NullStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/NullStyles.as.html"/>
+				<node icon="actionScriptIcon" label="PaneStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/PaneStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ProgressBarStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ProgressBarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="RadioButtonStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/RadioButtonStyles.as.html"/>
+				<node icon="actionScriptIcon" label="RootStyleSheet.as" url="source/Razor-as3/src/razor/skins/stylesheets/RootStyleSheet.as.html"/>
+				<node icon="actionScriptIcon" label="ScrollBarStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ScrollBarStyles.as.html"/>
+				<node icon="actionScriptIcon" label="TextAreaStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/TextAreaStyles.as.html"/>
+				<node icon="actionScriptIcon" label="TextInputStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/TextInputStyles.as.html"/>
+				<node icon="actionScriptIcon" label="ToolTipStyles.as" url="source/Razor-as3/src/razor/skins/stylesheets/ToolTipStyles.as.html"/>
+			</node>
+			<node icon="packageIcon" label="razor.utils" expanded="true">
+				<node icon="actionScriptIcon" label="ColorUtils.as" url="source/Razor-as3/src/razor/utils/ColorUtils.as.html"/>
+				<node icon="actionScriptIcon" label="CSSParser.as" url="source/Razor-as3/src/razor/utils/CSSParser.as.html"/>
+				<node icon="actionScriptIcon" label="DateUtils.as" url="source/Razor-as3/src/razor/utils/DateUtils.as.html"/>
 			</node>
 		</node>
 		<node label="assets">

@@ -56,7 +56,7 @@ package razor.skins
 		/** @private */ protected var dynamicSubStyles:Object;
 		/** @private */ protected var alsoInheritsFrom:Dictionary;
 		
-		public var takesPriority:Boolean = false;
+		razor_internal var takesPriority:Boolean = false;
 		
 		/**
 		 * Constructor.
@@ -94,14 +94,21 @@ package razor.skins
 				
 			var i:int = name.indexOf(" ");
 			
+			var subSheetArray:Array;
+			var subSheet:StyleSheet;
+			
 			if (i >= 0)
 			{
 				var more:String = name.substr(i+1);
 				name = name.substring(0,i);
 				
-				if (dynamicSubStyles[name] != null)
+				subSheetArray = getStyleSheet(name, null, true);
+				if (subSheetArray.length > 0)
+					subSheet = subSheetArray[0];
+				if (subSheet != null)
 				{
-					StyleSheet(dynamicSubStyles[name]).addRule(more, styleSheet);
+					//StyleSheet(dynamicSubStyles[name]).addRule(more, styleSheet);
+					subSheet.addRule(more, styleSheet);
 					return;
 				}
 				else
@@ -130,12 +137,17 @@ package razor.skins
 				takesPriority = true;
 			}
 			else
-			if (dynamicSubStyles[name] != null)
 			{
-				dynamicSubStyles[name].addRule("", styleSheet);
+				subSheetArray = getStyleSheet(name, null, true);
+				if (subSheetArray.length > 0)
+					subSheet = subSheetArray[0];
+				if (subSheet != null)
+				{
+					subSheet.addRule("", styleSheet);
+				}
+				else
+					dynamicSubStyles[name] = styleSheet;
 			}
-			else
-				dynamicSubStyles[name] = styleSheet;
 		}
 		
 		/**
@@ -447,7 +459,7 @@ package razor.skins
 			
 			while (!done)
 			{
-				//trace("..."+c);
+				//trace("1..."+c);
 				o = findStyleSheetForChain(c, this, customSheets);
 				
 				if (o != null)
@@ -489,7 +501,7 @@ package razor.skins
 			if (c.length == 0) done = true;
 			while (!done)
 			{
-				//trace("..."+c);
+				//trace("2..."+c);
 				o = findStyleSheetForChain(c, this, customSheets);
 				
 				if (o != null)
