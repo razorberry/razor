@@ -39,7 +39,7 @@ package razor.layout
 	 * Used for the Accordion control.
 	 * @private
 	 */
-	public class CollapsiblePane extends HidablePane
+	public class AccordionPane extends HidablePane
 	{
 		use namespace razor_internal;
 		
@@ -74,7 +74,7 @@ package razor.layout
 		////////////////////////////////////////////////////////////////////////////////////////
 		// PRIVATE METHODS
 		
-		public function CollapsiblePane()
+		public function AccordionPane()
 		{
 			implementation = new RowBasedLayout();
 		}
