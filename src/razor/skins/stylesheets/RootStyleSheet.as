@@ -37,7 +37,7 @@ package razor.skins.stylesheets
 		public var Button:StyleSheet = new ButtonStyles();
 		public var Calendar:StyleSheet = new CalendarStyles();
 		public var CheckBox:StyleSheet = new CheckBoxStyles();
-		public var CollapsiblePane:StyleSheet = new CollapsiblePaneStyles();
+		public var AccordionPane:StyleSheet = new AccordionPaneStyles();
 		public var ColorPicker:StyleSheet = new ColorPickerStyles();
 		public var ColorSwatch:StyleSheet = new ColorSwatchStyles();
 		public var ComboBox:StyleSheet = new ComboBoxStyles();

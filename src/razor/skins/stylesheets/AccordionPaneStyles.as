@@ -2,7 +2,7 @@
 {
 	import razor.skins.StyleSheet;
 
-	public class CollapsiblePaneStyles extends StyleSheet
+	public class AccordionPaneStyles extends StyleSheet
 	{
 		public var Header:StyleSheet;
 	}
