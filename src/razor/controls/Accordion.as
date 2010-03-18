@@ -27,12 +27,17 @@ package razor.controls
 {
 	import razor.core.StyledContainer;
 	import razor.core.razor_internal;
-	import razor.layout.CollapsiblePane;
+	import razor.layout.AccordionPane;
 	import razor.layout.Layer;
 	import razor.layout.LayoutData;
 	import razor.layout.ScrollArea;
 	import razor.layout.types.RowBasedLayout;
 
+	/**
+	 * Tag so we can use this container with mxml.
+	 */
+	[DefaultProperty("children")]
+	
 	/**
 	 * Class for an accordion component.
 	 * <p>You can add any number of collapsible panes.
@@ -48,7 +53,7 @@ package razor.controls
 	 * var content2:CollapsiblePane = accordion.addPane("Second Pane");
 	 * </listing>
 	 */
-	public class Accordion extends StyledContainer
+	public class Accordion extends Layer
 	{
 		use namespace razor_internal;
 		
@@ -60,16 +65,37 @@ package razor.controls
 		////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC METHODS
 		
+		/** @private */
+		override public function set children( value:Array ):void
+		{
+			
+			while ( numChildren > 0 )
+			{
+				removeChildAt( 0 );
+			}
+			
+			panes = new Array();
+			
+			for (var i:int = 0; i < value.length; i++)
+			{
+				var ld:LayoutData = new LayoutData();
+				ld.padding = 0;
+				Layer(scrollArea.content).addChildWithLayout( value[i] , ld);
+				panes.push( value[i] );
+			}
+			
+		}
+		
 		/**
 		* Add a new pane to this Accordion.
 		* @param	title	The header string to use
 		* @return	The newly created CollapsiblePane instance.
 		*/
-		public function addPane(title:String):CollapsiblePane
+		public function addPane(title:String):AccordionPane
 		{
 			var ld:LayoutData = new LayoutData();
 			ld.padding = 0;
-			var newpane:CollapsiblePane = __controlFactory.create(CollapsiblePane) as CollapsiblePane;
+			var newpane:AccordionPane = __controlFactory.create(AccordionPane) as AccordionPane;
 			Layer(scrollArea.content).addChildWithLayout(newpane, ld);
 			newpane.label = title;
 			panes.push(newpane);
@@ -80,9 +106,9 @@ package razor.controls
 		* Remove a pane from this Accordion. The pane's contents will also be destroyed.
 		* @param	pane	The pane instance to remove.
 		*/
-		public function removePane(pane:CollapsiblePane):void
+		public function removePane(pane:AccordionPane):void
 		{
-			var thepane:CollapsiblePane;
+			var thepane:AccordionPane;
 			
 			var i:int = int(panes.length);
 			while (--i >= 0)
@@ -103,14 +129,14 @@ package razor.controls
 		 * @param title	The title of the pane to retrieve.
 		 * @return 	A CollapsiblePane instance, or null if the pane was not found.
 		 */		
-		public function getPaneByTitle(title:String):CollapsiblePane
+		public function getPaneByTitle(title:String):AccordionPane
 		{
-			var thepane:CollapsiblePane;
+			var thepane:AccordionPane;
 			
 			var i:int = int(panes.length);
 			while (--i >= 0)
-				if (panes[i].label == title)
-					return panes[i];
+				if ("label" in panes[i] && panes[i].label == title)
+					return panes[i] as AccordionPane;
 				
 			return null;
 		}
@@ -120,10 +146,10 @@ package razor.controls
 		 * @param i	The index of the pane to retrieve.
 		 * @return A CollapsiblePane instance, or null if the pane was not found.
 		 */		
-		public function getPaneByIndex(i:int):CollapsiblePane
+		public function getPaneByIndex(i:int):AccordionPane
 		{
 			if (panes[i])
-				return panes[i];
+				return panes[i] as AccordionPane;
 				
 			return null;
 		}

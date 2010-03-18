@@ -25,7 +25,9 @@
 
 package razor.layout
 {
+	import flash.display.DisplayObject;
 	import flash.events.Event;
+	import flash.utils.Dictionary;
 	
 	import razor.core.razor_internal;
 	
@@ -44,7 +46,7 @@ package razor.layout
 		/** @private */ override protected function getClass():String { return "HidablePane"; }
 		
 		/** @private */ protected var open:Boolean = true;
-		/** @private */ protected var excludes:Array;
+		/** @private */ protected var excludes:Dictionary;
 		
 		////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC METHODS
@@ -69,17 +71,17 @@ package razor.layout
 			
 			if (!open)
 			{
-				excludes = new Array();
+				excludes = new Dictionary(true);
 			}
-			for each (var z:Object in children)
+			for each (var z:DisplayObject in children)
 			{
-				if (!open && !z.container.visible)
-					excludes[z.container] = true;
+				if (!open && !z.visible)
+					excludes[z] = true;
 				
-				if (open && excludes[z.container])
+				if (open && excludes[z])
 					continue;
 					
-				z.container.visible = open;
+				z.visible = open;
 			}
 			
 			if (open)
