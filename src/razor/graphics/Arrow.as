@@ -1,4 +1,4 @@
-package razor.skins.plastic
+package razor.graphics
 {
 	import flash.display.Graphics;
 	import flash.display.Sprite;

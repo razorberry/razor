@@ -25,6 +25,7 @@
 
 package razor.controls
 {
+	import razor.core.razor_internal;
 	import razor.layout.types.VerticalLayout;
 
 	/**
@@ -32,6 +33,8 @@ package razor.controls
 	 */
 	public class VBox extends Box
 	{
+		use namespace razor_internal;
+		
 		/** @private */ override protected function getClass():String { return "VBox"; }
 		
 		private var impl:VerticalLayout;
@@ -46,6 +49,7 @@ package razor.controls
 		public function set spacing(v:Number):void
 		{
 			impl.verticalGap = v;
+			doLayout();
 		}
 		
 		public function get spacing():Number

@@ -35,7 +35,7 @@ package razor.skins.plastic
 		public var Button:StyleSheet = new ButtonStyles();
 		public var Calendar:StyleSheet = new CalendarStyles();
 		public var CheckBox:StyleSheet = new CheckBoxStyles();
-		public var AccordionPane:StyleSheet = new AccordionPaneStyles();
+		public var AccordonPane:StyleSheet = new AccordionPaneStyles();
 		public var ColorPicker:StyleSheet = new ColorPickerStyles();
 		public var ColorSwatch:StyleSheet; // inherited
 		public var ComboBox:StyleSheet = new ComboBoxStyles();

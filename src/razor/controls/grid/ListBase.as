@@ -217,7 +217,7 @@ package razor.controls.grid
 		/** @private */
 		override protected function construct():void
 		{
-			container = new StyledContainer();
+			container = addBlueprint(StyledContainer) as StyledContainer;
 			addChild(container);
 			listMask = new Shape();
 			addChild(listMask);

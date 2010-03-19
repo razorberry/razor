@@ -183,7 +183,7 @@ package razor.controls
 		{
 			if (open && picker == null)
 			{
-				picker = ModalLayer.getInstance().addBlueprint(ColorPicker, {style: __style}) as ColorPicker;
+				picker = ModalLayer.getInstance().addBlueprint(ColorPicker, {style: __style}, NaN, __controlFactory) as ColorPicker;
 				var m:Metrics = picker.getPreferredMetrics();
 				picker.setSize(m.width, m.height);
 				registerChild(picker);

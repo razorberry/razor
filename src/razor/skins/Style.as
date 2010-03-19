@@ -61,7 +61,7 @@ package razor.skins
 		public var embedFonts:Boolean = false;
 		public var sharpText:Boolean = false;
 		
-		public var baseColor:uint = 0xEEEEEE;
+		public var baseColor:uint = 0xf7f7f7;
 		public var border:uint = 0x666666;
 		// borderThickness can be an Array [ t, b, l, r ];
 		public var borderThickness:* = 0.5;

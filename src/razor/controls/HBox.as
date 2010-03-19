@@ -25,6 +25,7 @@
 
 package razor.controls
 {
+	import razor.core.razor_internal;
 	import razor.layout.types.HorizontalLayout;
 
 	/**
@@ -32,6 +33,8 @@ package razor.controls
 	 */
 	public class HBox extends Box
 	{
+		use namespace razor_internal;
+		
 		/** @private */ override protected function getClass():String { return "HBox"; }
 		
 		private var impl:HorizontalLayout;
@@ -46,6 +49,7 @@ package razor.controls
 		public function set spacing(v:Number):void
 		{
 			impl.horizontalGap = v;
+			doLayout();
 		}
 		
 		public function get spacing():Number

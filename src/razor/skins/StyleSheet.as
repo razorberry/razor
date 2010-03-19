@@ -90,7 +90,7 @@ package razor.skins
 		public function addRule(name:String, styleSheet:StyleSheet):void
 		{
 			if (dynamicSubStyles == null)
-				dynamicSubStyles = new Object;
+				dynamicSubStyles = {};
 				
 			var i:int = name.indexOf(" ");
 			
@@ -103,7 +103,7 @@ package razor.skins
 				name = name.substring(0,i);
 				
 				subSheetArray = getStyleSheet(name, null, true);
-				if (subSheetArray && subSheetArray.length > 0)
+				if (subSheetArray.length > 0)
 					subSheet = subSheetArray[0];
 				if (subSheet != null)
 				{
@@ -122,6 +122,8 @@ package razor.skins
 			
 			if (name == "" || name == "*")
 			{
+				appendStyleSheet(styleSheet);
+				
 				if (dynamicStyles != null)
 				{
 					var sstyles:Object = styleSheet.getStyle();
@@ -134,12 +136,13 @@ package razor.skins
 				var bc:Class = styleSheet.getBaseClass();
 				if (bc != null)
 					dynamicBaseClass = bc;
+				
 				takesPriority = true;
 			}
 			else
 			{
 				subSheetArray = getStyleSheet(name, null, true);
-				if (subSheetArray && subSheetArray.length > 0)
+				if (subSheetArray.length > 0)
 					subSheet = subSheetArray[0];
 				if (subSheet != null)
 				{
@@ -246,7 +249,7 @@ package razor.skins
 				return [this];
 				
 			var picked:StyleSheet;
-			var a:Array = new Array();
+			var a:Array = [];
 			
 			if (customSheets != null)
 			{
@@ -293,9 +296,7 @@ package razor.skins
 				else
 				a.push(o[name]);
 				
-			if (a.length > 0) return a;
-			
-			return null;
+			return a;
 		}
 		
 		/**

@@ -28,7 +28,7 @@ package razor.utils
 	import razor.skins.StyleSheet;
 	
 	/**
-	 * Experimental and incomplete css parser.
+	 * Experimental and incomplete css parser. DO NOT USE
 	 */
 	public class CSSParser
 	{

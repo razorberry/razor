@@ -1,7 +1,7 @@
 ﻿package razor.skins.plastic.stylesheets 
 {
 	import razor.skins.StyleSheet;
-	import razor.skins.plastic.Arrow;
+	import razor.graphics.Arrow;
 	public class ArrowStyles extends StyleSheet
 	{
 		public static var baseClass:Class = Arrow;

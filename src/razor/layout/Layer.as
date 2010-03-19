@@ -70,7 +70,7 @@ package razor.layout
 		use namespace razor_internal;
 		
 		public static const E_RESIZE:String = Event.RESIZE;
-
+		
 		/** @private */ override protected function getClass():String { return "Layer"; }
 		
 		/**

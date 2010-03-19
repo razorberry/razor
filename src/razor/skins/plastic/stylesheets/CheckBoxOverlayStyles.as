@@ -1,7 +1,7 @@
 ﻿package razor.skins.plastic.stylesheets 
 {
 	import razor.skins.NullContainer;
-	import razor.skins.plastic.Check;
+	import razor.graphics.Check;
 	import razor.skins.StyleSheet;
 
 	public class CheckBoxOverlayStyles extends StyleSheet

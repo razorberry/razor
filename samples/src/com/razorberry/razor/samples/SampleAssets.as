@@ -15,7 +15,7 @@ package com.razorberry.razor.samples
 		public static var background:Class;
 		
 		
-		[Embed(source="/../assets/maxine.ttf", fontName="Maxine", mimeType="application/x-font-truetype")]
+		[Embed(source="/../assets/maxine.ttf", fontName="Maxine", fontWeight="normal", mimeType="application/x-font-truetype", embedAsCFF="false")]
 		public static var maxine:Class;
 		
 		[Embed(source="/../assets/SourceStyles.css", mimeType="application/octet-stream")]

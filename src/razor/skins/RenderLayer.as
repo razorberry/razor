@@ -200,7 +200,7 @@ package razor.skins
 		/**
 		* Get the inner dimensions for this graphic
 		* @private
-		* @return	An object of the form {l: X, r:X, t:X, b:X}
+		* @return	A Matrics instance
 		*/
 		public function getBorderMetrics():Metrics
 		{

@@ -120,7 +120,9 @@ package razor.controls
 			
 			var m:Metrics = (background is IBordered) ? IBordered(background).getBorderMetrics() : new Metrics();
 			
-			textField.defaultTextFormat = __style.textFormat;
+			if (textField.styleSheet == null)
+				textField.defaultTextFormat = __style.textFormat;
+			
 			textField.x = m.l;
 			textField.y = m.t;
 			

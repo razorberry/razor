@@ -308,7 +308,7 @@ package razor.skins
 			}
 			else
 			{
-				clip = new Bitmap(bmp, "auto", false);
+				clip = new Bitmap(bmp, "auto", true);
 				addChild(clip);
 			}
 		}

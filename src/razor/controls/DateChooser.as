@@ -126,7 +126,7 @@ package razor.controls
 			btn = addBlueprint("ToggleButton") as Button;
 			if (btn)
 			{
-				var ss:StyleSheet = Settings.rootStyleSheet.findStyle(__styleChain.concat("Icon"))
+				var ss:StyleSheet = __controlFactory.rootStyleSheet.findStyle(__styleChain.concat("Icon"))
 				if (ss)
 				btn.addIcon(ss.getBaseClass());
 				btn.addEventListener(Button.E_CLICK, onClick);
@@ -209,7 +209,7 @@ package razor.controls
 		{
 			if (open && calendar == null)
 			{
-				calendar = ModalLayer.getInstance().addBlueprint(Calendar, {style: __style}) as Calendar;
+				calendar = ModalLayer.getInstance().addBlueprint(Calendar, {style: __style}, NaN, __controlFactory) as Calendar;
 				var m:Metrics = calendar.getPreferredMetrics();
 				calendar.setSize(m.width, m.height);
 				registerChild(calendar);

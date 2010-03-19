@@ -2,7 +2,7 @@ package razor.skins.plastic.stylesheets
 {
 	import razor.controls.Button;
 	import razor.skins.StyleSheet;
-	import razor.skins.plastic.CalendarIcon;
+	import razor.graphics.CalendarIcon;
 
 	public class DateChooserStyles extends StyleSheet
 	{

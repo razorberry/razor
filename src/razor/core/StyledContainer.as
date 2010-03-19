@@ -283,20 +283,23 @@ package razor.core
 		* @param	tagOrClass	The skin ID or class of the component to add.
 		* @param	initObj	(optional)	Any initial parameters can be pushed in to the component here.
 		* @param	depth	(optional) The depth at which to add the component
+		* @param	controlFactory (optional)	The controlFactory instance to use.
 		* @return	The new component.
 		*/
-		razor_internal function addBlueprint(tagOrClass:*, initializers:Object = null, depth:Number = NaN):DisplayObject
+		razor_internal function addBlueprint(tagOrClass:*, initializers:Object = null, depth:Number = NaN, controlFactory:ControlFactory = null):DisplayObject
 		{
 			var c:Container;
 			var u:DisplayObject;
 			
+			if (controlFactory == null) controlFactory = __controlFactory;
+			
 			if (tagOrClass is Class)
 			{
-				u = __controlFactory.create(tagOrClass, null, this, initializers, __customSheets);
+				u = controlFactory.create(tagOrClass, null, this, initializers, __customSheets);
 			}
 			else
 			{
-				u = __controlFactory.createFromRule(__styleChain.concat(tagOrClass), this, initializers, __customSheets);
+				u = controlFactory.createFromRule(__styleChain.concat(tagOrClass), this, initializers, __customSheets);
 			}
 			
 			c = u as Container;

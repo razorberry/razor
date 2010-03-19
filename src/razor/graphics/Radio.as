@@ -1,4 +1,4 @@
-package razor.skins.plastic
+package razor.graphics
 {
 	import razor.skins.RenderLayer;
 	import flash.display.Graphics;

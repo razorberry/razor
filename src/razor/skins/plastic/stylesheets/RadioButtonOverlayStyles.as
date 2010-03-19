@@ -1,7 +1,7 @@
 package razor.skins.plastic.stylesheets 
 {
 	import razor.skins.NullContainer;
-	import razor.skins.plastic.Radio;
+	import razor.graphics.Radio;
 	import razor.skins.StyleSheet;
 
 	public class RadioButtonOverlayStyles extends StyleSheet
