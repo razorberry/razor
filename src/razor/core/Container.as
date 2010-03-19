@@ -349,6 +349,8 @@ package razor.core
 		
 		razor_internal function sizeChild(child:DisplayObject, w:Number, h:Number):void
 		{
+			if (child == null)
+				return;
 			if ("setSize" in child)
 				Object(child).setSize(w,h);
 			else

@@ -49,8 +49,10 @@ package com.razorberry.razor.samples.examples
 			// Apply the stylesheet to every Button instance.
 			sheet.addRule("Button", buttonStyles);
 			
+			sheet.addRule("myButton Label", new StyleSheet(null, null, {Over: new StyleSheet({fontColor:0xff})}));
 			sheet.addRule("myButton", new StyleSheet(null, null, {Over: new StyleSheet({baseColor:0xff0000})}));
-			sheet.addRule("myButton Label", new StyleSheet(null, null, {Over: new StyleSheet({fontColor:0x01})}));
+			
+			
 		}
 		
 		override protected function construct():void

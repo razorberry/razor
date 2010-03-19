@@ -186,7 +186,7 @@ package razor.controls
 		override public function set enabled(b:Boolean):void
 		{
 			var c:DisplayObject = getStateElement("Background"); 
-			if ("enabled" in c) c["enabled"] = b;
+			if (c && "enabled" in c) c["enabled"] = b;
 			else if (c is InteractiveObject) InteractiveObject(c).mouseEnabled = false;
 			
 			super.enabled = b;

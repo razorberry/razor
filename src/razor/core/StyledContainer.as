@@ -463,7 +463,7 @@ package razor.core
 			}
 			a.states = a.states.concat(states);
 			a.elements = new Object();
-			if (setstate) setState(__currentState);
+			if (setstate) setState(__currentState ? __currentState : (states && states.length > 0 ? states[0] : null));
 			return __states[tag].current;
 		}
 		
@@ -492,6 +492,9 @@ package razor.core
 		*/
 		protected function setState(state:String):void
 		{
+			if (state == null)
+				return;
+			
 			var oldState:String = __currentState;
 			__currentState = state;
 			for (var z:String in __states)

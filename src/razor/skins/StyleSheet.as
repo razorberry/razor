@@ -25,6 +25,7 @@
 
 package razor.skins
 {
+	import flash.text.StyleSheet;
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
 	
@@ -79,7 +80,7 @@ package razor.skins
 		public function appendStyleSheet(styleSheet:StyleSheet):void
 		{
 			if (attachments == null)
-				attachments = new Array();
+				attachments = [];
 			
 			attachments.push(styleSheet);
 		}
@@ -108,7 +109,9 @@ package razor.skins
 				if (subSheet != null)
 				{
 					//StyleSheet(dynamicSubStyles[name]).addRule(more, styleSheet);
-					subSheet.addRule(more, styleSheet);
+					var newss2:StyleSheet = new StyleSheet();
+					newss2.addRule(more, styleSheet);
+					subSheet.addRule("", newss2);
 					return;
 				}
 				else
@@ -182,7 +185,7 @@ package razor.skins
 				if (zz != null)
 				{
 					//trace("Re-finding base: "+zz);
-					var composite:Object = new Object();
+					var composite:Object = {};
 					var last:Object = s;
 					
 					if (zz is Class)
@@ -190,7 +193,7 @@ package razor.skins
 					else if (zz is StyleSheet)
 						o = StyleSheet(zz).getStyle();
 					else
-						o = new Object();
+						o = {};
 					
 					if (o != null)
 						for (var z:String in o)
@@ -437,7 +440,7 @@ package razor.skins
 			
 			var o:StyleSheet;
 			var base:Class;
-			var combined:Object = new Object();
+			var combined:Object = {};
 			var found:Boolean = false;
 			var done:Boolean = false;
 			var s:Object;
@@ -488,7 +491,7 @@ package razor.skins
 					}
 				}
 				
-				if (c.length == 0)
+				if (c.length == 0 || oneWay)
 					done = true;
 				else
 					c.shift();
