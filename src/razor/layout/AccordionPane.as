@@ -45,7 +45,7 @@ package razor.layout
 		
 		public static const E_RESIZE:String = HidablePane.E_RESIZE;
 	
-		/** @private */ override protected function getClass():String { return "CollapsiblePane"; }
+		/** @private */ override protected function getClass():String { return "AccordionPane"; }
 		
 		/** @private */ protected var border:DisplayObject;
 		
