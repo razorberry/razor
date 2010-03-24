@@ -33,6 +33,7 @@ package razor.core
 	import razor.skins.Settings;
 	import razor.skins.Style;
 	import razor.skins.StyleSheet;
+	import razor.skins.plastic.presets.Default;
 	
 	
 	/**
@@ -59,8 +60,8 @@ package razor.core
 		use namespace razor_internal;
 		
 		/** @private */ protected var _rootStyleSheet:StyleSheet;
-		/** @private */ protected var _defaultStyle:Style;
-		/** @private */ protected var _defaultStyleConstructor:Class;
+		/** @private */ protected var _defaultStyle:Style = new Default();
+		/** @private */ protected var _defaultStyleConstructor:Class = Default;
 		
 		/**
 		 * Constructor. 

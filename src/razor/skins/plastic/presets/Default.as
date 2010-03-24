@@ -6,7 +6,7 @@ package razor.skins.plastic.presets
 	{
 		override protected function setOverrides():void
 		{
-			//baseColor=0x336600;
+			baseColor=0xd7d7d7;
 			bevel = 2;
 			roundedness = 4;
 			glossiness = 0.8;
