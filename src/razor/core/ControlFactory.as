@@ -33,8 +33,8 @@ package razor.core
 	import razor.skins.Settings;
 	import razor.skins.Style;
 	import razor.skins.StyleSheet;
-	import razor.skins.plastic.presets.Default;
-	
+	import razor.skins.plastic.PlasticStyleSheet;
+	import razor.skins.stylesheets.RootStyleSheet;
 	
 	/**
 	 * Class to create Razor components using a particular StyleSheet.
@@ -59,9 +59,11 @@ package razor.core
 	{
 		use namespace razor_internal;
 		
+		private static var _defaultFactory:ControlFactory = new ControlFactory();
+		
 		/** @private */ protected var _rootStyleSheet:StyleSheet;
-		/** @private */ protected var _defaultStyle:Style = new Default();
-		/** @private */ protected var _defaultStyleConstructor:Class = Default;
+		/** @private */ protected var _defaultStyle:Style;
+		/** @private */ protected var _defaultStyleConstructor:Class;
 		
 		/**
 		 * Constructor. 
@@ -69,6 +71,15 @@ package razor.core
 		 */
 		public function ControlFactory()
 		{
+			setDefaults();
+		}
+		
+		protected function setDefaults():void
+		{
+			var ss:StyleSheet = new RootStyleSheet();
+			ss.appendStyleSheet(new PlasticStyleSheet());
+			rootStyleSheet = ss;
+			defaultStyle = new Style();	
 		}
 		
 		/**
@@ -83,7 +94,7 @@ package razor.core
 		 */		
 		public static function create(control:Class, styleClass:String = null, styleParent:StyledContainer = null, initializers:Object = null, supplementalSheets:Array = null):DisplayObject
 		{
-			return defaultFactory.create(control, styleClass, styleParent, initializers, supplementalSheets);
+			return _defaultFactory.create(control, styleClass, styleParent, initializers, supplementalSheets);
 		}
 		
 		
@@ -98,7 +109,7 @@ package razor.core
 		 */
 		public static function createFromRule(selectors:Array, styleParent:StyledContainer = null, initializers:Object = null, supplementalSheets:Array = null):DisplayObject
 		{
-			return defaultFactory.createFromRule(selectors, styleParent, initializers, supplementalSheets);
+			return _defaultFactory.createFromRule(selectors, styleParent, initializers, supplementalSheets);
 		}
 		
 		
@@ -109,7 +120,12 @@ package razor.core
 		 */
 		public static function get defaultFactory():ControlFactory
 		{
-			return Settings.defaultFactory;
+			return _defaultFactory;
+		}
+		
+		public static function set defaultFactory(factory:ControlFactory):void
+		{
+			_defaultFactory = factory;
 		}
 		
 		
@@ -127,7 +143,7 @@ package razor.core
 		/** @private */
 		public function get rootStyleSheet():StyleSheet
 		{
-			return (_rootStyleSheet != null ? _rootStyleSheet : Settings.rootStyleSheet);
+			return _rootStyleSheet;
 		}
 		
 		/**

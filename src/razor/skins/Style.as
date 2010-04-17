@@ -61,18 +61,18 @@ package razor.skins
 		public var embedFonts:Boolean = false;
 		public var sharpText:Boolean = false;
 		
-		public var baseColor:uint = 0xe0e0e0;
-		public var border:uint = 0x666666;
+		public var baseColor:uint = 0xf0f0f0;
+		public var border:uint = 0x999999;
 		// borderThickness can be an Array [ t, b, l, r ];
 		public var borderThickness:* = 0.5;
 		// bevel can be an array [ t, b, l, r ];
 		public var bevel:* = 0;
 		// Roundedness can be a Number or an Array: [tl, tr, bl, br]
 		public var roundedness:* = 0;
-		public var variance:Number = 1;
-		public var glossiness:Number = 0;  //0-1
+		public var variance:Number = 0.8;
+		public var glossiness:Number = 0.8;  //0-1
 		public var azimuth:Number = -45;
-		public var shadow:Number = 3;
+		public var shadow:Number = 2;
 		
 		public var inset:Boolean = false;
 		public var opacity:Number = 1;    // 0-1

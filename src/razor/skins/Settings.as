@@ -36,9 +36,6 @@ package razor.skins
 	 */
 	public final class Settings 
 	{
-		private static var _rootStyleSheet:StyleSheet = new RootStyleSheet();
-		private static var _style:Style;
-		private static var _constructor:Class = Style;
 		private static var _controlFactory:ControlFactory;
 		private static var _assets:AssetCache;
 		
@@ -57,8 +54,11 @@ package razor.skins
 		 */		
 		public static function setSkin(styleSheet:StyleSheet, defaultStyle:Style = null):void
 		{
-			rootStyleSheet = new RootStyleSheet();
-			rootStyleSheet.appendStyleSheet(styleSheet);
+			var ss:StyleSheet = new RootStyleSheet();
+			ss.appendStyleSheet(styleSheet);
+			
+			rootStyleSheet = ss;
+			
 			style = defaultStyle ? defaultStyle : new Style();
 		}
 		
@@ -68,13 +68,13 @@ package razor.skins
 		public static function set rootStyleSheet(styleSheet:StyleSheet):void
 		{
 			if (styleSheet != null)
-				_rootStyleSheet = styleSheet;
+				defaultFactory.rootStyleSheet = styleSheet;
 		}
 		
 		/** @private */
 		public static function get rootStyleSheet():StyleSheet
 		{
-			return _rootStyleSheet;
+			return defaultFactory.rootStyleSheet;
 		}
 		
 		/**
@@ -83,37 +83,28 @@ package razor.skins
 		*/
 		public function set defaultFactory(factory:ControlFactory):void
 		{
-			_controlFactory = factory;
+			ControlFactory.defaultFactory = factory;
 		}
 		
 		/** @private */
 		public static function get defaultFactory():ControlFactory
 		{
-			if (_controlFactory == null)
-			{
-				_controlFactory = new ControlFactory();
-			}
-			
-			return _controlFactory;
+			return ControlFactory.defaultFactory;
 		}
 		
 		/**
 		* Get/Set the default style for all components.
 		* @param	s	The style to use as default for all components.
 		*/
-		public static function set style(s:razor.skins.Style):void
+		public static function set style(s:Style):void
 		{
-			_style = s;
-			_constructor = Object(_style).constructor;
+			defaultFactory.defaultStyle = style;
 		}
 		
 		/** @private */
 		public static function get style():razor.skins.Style
 		{
-			// TODO: discrepancy between this and as2 version, which just returns a new _style()
-			var newStyle:Style = (new _constructor() as Style);
-			newStyle.integrate(_style);
-			return newStyle;
+			return defaultFactory.defaultStyle;
 		}
 		
 		/**
@@ -122,7 +113,7 @@ package razor.skins
 		 */
 		public static function hasBlueprint(styleChain:Array):Boolean
 		{
-			return (_rootStyleSheet.findStyle(styleChain) != null);
+			return (rootStyleSheet.findStyle(styleChain) != null);
 		}
 		
 		/**
