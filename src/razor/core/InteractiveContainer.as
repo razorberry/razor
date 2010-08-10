@@ -1,7 +1,7 @@
 /*****************************************************************************
 * Razor Component Framework for ActionScript 3.
 * Copyright 2009 Ashley Atkins (www.razorberry.com)
-* 
+*
 * This file is part of the Razor Component Framework, which is made available
 * under the MIT License.
 * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -13,7 +13,7 @@
 *
 * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,49 +33,49 @@ package razor.core
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	import flash.utils.Timer;
-	
+
 	import razor.accessibility.BasicAccImpl;
 	import razor.core.tooltips.ITooltip;
 	import razor.core.tooltips.TooltipData;
 	import razor.layout.ModalLayer;
-	
+
 	/**
 	 * Dispatched when the container is clicked (pressed and released)
 	 * @eventType razor.core.InteractiveContainer.E_CLICK
 	 */
 	[Event(name="e_click", type="flash.events.Event")]
-	
+
 	/**
 	 * Dispatched when the container is rolled over
 	 * @eventType razor.core.InteractiveContainer.E_ROLLOVER
 	 */
 	[Event(name="e_rollOver", type="flash.events.Event")]
-	
+
 	/**
 	 * Dispatched when the container is rolled out
 	 * @eventType razor.core.InteractiveContainer.E_ROLLOUT
 	 */
 	[Event(name="e_rollOut", type="flash.events.Event")]
-	
+
 	/**
 	 * Dispatched when the container is pressed
 	 * @eventType razor.core.InteractiveContainer.E_PRESS
 	 */
 	[Event(name="e_press", type="flash.events.Event")]
-	
+
 	/**
 	 * Dispatched when the container is released
 	 * @eventType razor.core.InteractiveContainer.E_RELEASE
 	 */
 	[Event(name="e_release", type="flash.events.Event")]
-	
+
 	/**
 	 * Dispatched when the container is pressed, then the mouse is released
 	 * outside of the container bounds.
 	 * @eventType razor.core.InteractiveContainer.E_RELEASE_OUTSIDE
 	 */
 	[Event(name="e_releaseOutside", type="flash.events.Event")]
-	
+
 	/**
 	 * Class to add mouse interactivity to a StyledContainer.
 	 * Used for buttons and such.
@@ -87,7 +87,7 @@ package razor.core
 	public class InteractiveContainer extends StyledContainer
 	{
 		use namespace razor_internal;
-		
+
 		/////////////////////////////////////////////////////////////////
 		// EVENT CONSTANTS
 		public static const E_CLICK:String = "e_click";
@@ -96,30 +96,30 @@ package razor.core
 		public static const E_PRESS:String = "e_press";
 		public static const E_RELEASE:String = "e_release";
 		public static const E_RELEASE_OUTSIDE:String = "e_releaseOutside";
-		
+
 		private static const traceMouseEvents:Boolean = false;
-		
+
 		private var _tooltip:ITooltip;
 		private var _tooltipTimer:Timer;
 		/** @private */ protected var tooltipData:TooltipData;
-		
+
 		/** @private */ protected var mouseIsDown:Boolean = false;
-		
+
 		private var _userOnPress:Function;
 		private var _userOnRelease:Function;
 		private var _userOnRollOver:Function;
 		private var _userOnRollOut:Function;
 		private var _userOnReleaseOutside:Function;
-		
+
 		////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC METHODS
-		
+
 		/** @private */
 		public function get onPressCallback():Function
 		{
 			return _userOnPress;
 		}
-		
+
 		/**
 		 * Set a callback for when this container is pressed.
 		 */
@@ -127,13 +127,13 @@ package razor.core
 		{
 			_userOnPress = f;
 		}
-		
+
 		/** @private */
 		public function get onReleaseCallback():Function
 		{
 			return _userOnRelease;
 		}
-		
+
 		/**
 		 * Set a callback for when this container is released.
 		 */
@@ -141,13 +141,13 @@ package razor.core
 		{
 			_userOnRelease = f;
 		}
-		
+
 		/** @private */
 		public function get onRollOverCallback():Function
 		{
 			return _userOnRollOver;
 		}
-		
+
 		/**
 		 * Set a callback for when this container is rolled over with the mouse.
 		 */
@@ -155,13 +155,13 @@ package razor.core
 		{
 			_userOnRollOver = f;
 		}
-		
+
 		/** @private */
 		public function get onRollOutCallback():Function
 		{
 			return _userOnRollOut;
 		}
-		
+
 		/**
 		 * Set a callback for when the mouse rolls off this container.
 		 */
@@ -169,13 +169,13 @@ package razor.core
 		{
 			_userOnRollOut = f;
 		}
-		
+
 		/** @private */
 		public function get onReleaseOutsideCallback():Function
 		{
 			return _userOnReleaseOutside;
 		}
-		
+
 		/**
 		 * Set a callback for when the mouse is released outside of this container.
 		 */
@@ -183,25 +183,25 @@ package razor.core
 		{
 			_userOnReleaseOutside = f;
 		}
-		
+
 		////////////////////////////////////////////////////////////////////////////////////////
 		// PRIVATE METHODS
-		
+
 		/**
 		 * Constructor.
 		 */
 		public function InteractiveContainer(disableInitially:Boolean = false)
 		{
 			super();
-			
+
 			if (!disableInitially)
 			{
 				mouseEnabled = true;
 			}
-				
+
 			buttonMode = true;
 			useHandCursor = true;
-			
+
 			addEventListener(MouseEvent.MOUSE_DOWN, __onPress, false, 1);
 	        addEventListener(MouseEvent.ROLL_OUT, __onRollOut, false, 1);
 	        addEventListener(MouseEvent.ROLL_OVER, __onRollOver, false, 1);
@@ -210,132 +210,132 @@ package razor.core
 	        addEventListener(KeyboardEvent.KEY_DOWN, __onKeyDown);
 	        addEventListener(KeyboardEvent.KEY_UP, __onKeyUp);
 		}
-		
+
 		override protected function createAccessibilityImplementation():void
 		{
 			accessibilityImplementation = new BasicAccImpl(this);
 		}
-		
+
 		// Override these functions in subclasses:
 		/**
 		 * Abstract rollover method.
 		 */
 		protected function _onRollOver():void
 		{
-			
+
 		}
-		
+
 		/**
 		 * Abstract rollout method.
 		 */
 		protected function _onRollOut():void
 		{
-			
+
 		}
-		
+
 		/**
 		 * Abstract press method.
 		 */
 		protected function _onPress():void
 		{
-			
+
 		}
-		
+
 		/**
 		 * Abstract release method.
 		 */
 		protected function _onRelease():void
 		{
-			
+
 		}
-		
+
 		/**
 		 * Abstract release outside method.
 		 */
 		protected function _onReleaseOutside():void
 		{
-			
+
 		}
-		
-		
+
+
 		// Super-internal implementations of our button functions that aren't intended to be overridden
 		/** @private */
 		protected final function __onRollOver(e:MouseEvent = null):void
 		{
 			if (!mouseEnabled) return;
-			
+
 			if (traceMouseEvents)
 				debug("onRollOver");
-			
+
 			if (mouseIsDown)
 				return;
-			
+
 			createTimer();
-			
+
 			if (_userOnRollOver != null)
 				_userOnRollOver();
 			_onRollOver();
 			if (__enabled)
 				dispatchEvent(new Event(E_ROLLOVER));
 		}
-		
+
 		/** @private */
 		protected final function __onRollOut(e:MouseEvent = null):void
 		{
 			if (!mouseEnabled) return;
-			
+
 			if (traceMouseEvents)
 				debug("onRollOut");
 
 			if (_tooltip)
 				destroyTooltip();
 			destroyTimer();
-				
+
 			if (mouseIsDown)
 				return;
-				
+
 			if (_userOnRollOut != null)
 				_userOnRollOut();
 			_onRollOut();
 			if (__enabled)
 				dispatchEvent(new Event(E_ROLLOUT));
 		}
-		
+
 		/** @private */
 		protected final function __onPress(e:MouseEvent = null):void
 		{
 			if (!mouseEnabled) return;
-			
+
 			if (traceMouseEvents)
 				debug("onPress");
-			
+
 			if (_tooltip)
 				destroyTooltip();
 			destroyTimer();
-			
+
 			mouseIsDown = true;
 			if (_userOnPress != null)
 				_userOnPress();
 			_onPress();
-			
+
 			if (stage != null)
 			{
 				stage.addEventListener(MouseEvent.MOUSE_UP, onStageMouseUp, false, 1, true);
 				addEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
 			}
-			
+
 			if (__enabled)
 				dispatchEvent(new Event(E_PRESS));
 		}
-		
+
 		/** @private */
 		protected final function __onClick(e:MouseEvent = null):void
 		{
 			if (!mouseEnabled) return;
-			
+
 			if (traceMouseEvents)
 				debug("onClick");
-			
+
 			if (enterPressed || spacePressed)
 			{
 				__onPress();
@@ -344,13 +344,13 @@ package razor.core
 			//if (__enabled)
 			//dispatchEvent(new Event(E_CLICK));
 		}
-		
+
 		/** @private */
 		private function onRemoved(e:Event):void
 		{
 			stage.removeEventListener(MouseEvent.MOUSE_UP, onStageMouseUp, false);
 		}
-		
+
 		/** @private */
 		protected final function onStageMouseUp(e:MouseEvent = null):void
 		{
@@ -361,16 +361,16 @@ package razor.core
 				__onReleaseOutside();
 			}
 		}
-		
+
 		/** @private */
 		protected final function __onRelease(e:MouseEvent = null):void
 		{
 			if (!mouseIsDown || !mouseEnabled)
 				return;
-				
+
 			if (traceMouseEvents)
 				debug("onRelease");
-				
+
 			mouseIsDown = false;
 			if (_userOnRelease != null)
 				_userOnRelease();
@@ -381,22 +381,22 @@ package razor.core
 				dispatchEvent(new Event(E_CLICK));
 			}
 		}
-		
+
 		/** @private */
 		protected final function __onReleaseOutside(e:MouseEvent = null):void
 		{
 			if (!mouseEnabled) return;
-			
+
 			if (traceMouseEvents)
 				debug("onReleaseOutside");
-			
+
 			if (_userOnReleaseOutside != null)
 				_userOnReleaseOutside();
 			_onReleaseOutside();
 			if (__enabled)
 				dispatchEvent(new Event(E_RELEASE_OUTSIDE));
 		}
-		
+
 		private var enterPressed:Boolean = false;
 		private var spacePressed:Boolean = false;
 		/** @private */
@@ -407,7 +407,7 @@ package razor.core
 			if (e.charCode == Keyboard.SPACE)
 				spacePressed = true;
 		}
-		
+
 		/** @private */
 		protected function __onKeyUp(e:KeyboardEvent):void
 		{
@@ -416,38 +416,38 @@ package razor.core
 			if (e.charCode == Keyboard.SPACE)
 				spacePressed = false;
 		}
-		
+
 		override public function set enabled(b:Boolean):void
 		{
 			mouseEnabled = b;
 			super.enabled = b;
 		}
-		
+
 		override public function destroy():void
 		{
 			if (_tooltipTimer)
 			{
 				_tooltipTimer.stop();
-				
+
 			}
 			if (_tooltip)
 			{
 				_tooltip.destroy();
 				_tooltip = null;
 			}
-			
+
 			super.destroy();
 		}
-		
+
 		private function createTimer():void
 		{
 			destroyTimer();
-			
+
 			_tooltipTimer = new Timer(750, 1);
 			_tooltipTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete, false, 0, true);
 			_tooltipTimer.start();
 		}
-		
+
 		private function destroyTimer():void
 		{
 			if (_tooltipTimer)
@@ -457,11 +457,11 @@ package razor.core
 				_tooltipTimer = null;
 			}
 		}
-		
+
 		private function onTimerComplete(e:TimerEvent):void
 		{
 			destroyTimer();
-			
+
 			// Only put tooltips on stage objects.. otherwise timer gets destroyed
 			// no harm, no foul if container is removed mid-timer.
 			if (stage != null && tooltipData != null)
@@ -473,9 +473,9 @@ package razor.core
 					if (_tooltip)
 					{
 						_tooltip.setValue(tooltipData);
-						var p:Point = new Point(mouseX, mouseY);
-						p = ml.globalToLocal(localToGlobal(p));
-						_tooltip.move(p.x, p.y + 20);
+
+						var pp:Point = ml.getNearestPopPoint(_tooltip as DisplayObject, null, true, true);
+						_tooltip.move(pp.x, pp.y + 20);
 					}
 					else
 						_tooltip = null;
@@ -485,9 +485,9 @@ package razor.core
 			}
 			else
 				_tooltip = null;
-			
+
 		}
-		
+
 		private function destroyTooltip():void
 		{
 			if (_tooltip)
@@ -496,17 +496,17 @@ package razor.core
 				_tooltip = null;
 			}
 		}
-		
+
 		public function set tooltip(data:TooltipData):void
 		{
 			tooltipData = data;
 		}
-		
+
 		public function get tooltip():TooltipData
 		{
 			return tooltipData;
 		}
-		
+
 	}
-	
+
 }
